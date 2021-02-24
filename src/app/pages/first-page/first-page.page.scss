@@ -1,33 +1,28 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background: url('../../../assets/img/bg.svg') no-repeat;
-  background-size: contain;
-  width: 100vw;
-  height: 100vh;
-  text-align: center;
-
-  img {
-    margin-bottom: 35px;
-  }
-
-  ion-title {
-    font-family: 'Stardos Stencil', cursive;
-    font-size: 2rem;
-  }
-
-  div.buttons {
-      width: 70%;
-  }
-
-  a {
-      text-decoration: none;
-  }
-
-  ion-button {
-    font-family: 'JetBrains Mono', monospace;
-  }
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: url('../../../assets/img/bg.svg') no-repeat;
+    background-size: contain;
+    max-width: 450px;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    img {
+        margin-bottom: 35px;
+    }
+    ion-title {
+        font-family: 'Stardos Stencil', cursive;
+        font-size: 2rem;
+    }
+    div.buttons {
+        width: 70%;
+    }
+    a {
+        text-decoration: none;
+    }
+    ion-button {
+        font-family: 'JetBrains Mono', monospace;
+    }
 }
