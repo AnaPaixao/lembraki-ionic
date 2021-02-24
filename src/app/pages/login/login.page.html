@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="container">
+
+    <a class="nav-link" href="/first-page"><img src="/assets/img/logo.svg" alt="Logo flash card"></a>
+
+    <div class="login">
+      <ion-button expand="block" fill="outline" class="button-stable" (click)="loginGoogle()">
+        <img src="/assets/img/google-icon.svg" width="20px" height="20px" alt="">
+        Log in with Google
+      </ion-button>
+
+      <p class="break">or</p>
+
+      <ion-item class="ion-margin-top" lines="none" color="light">
+        <ion-label position="floating" color="dark">E-mail</ion-label>
+        <ion-input type="email" color="dark" [(ngModel)]="userLogin.email"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-top" lines="none" color="light">
+        <ion-label position="floating" color="dark">Senha</ion-label>
+        <ion-input type="password" color="dark" [(ngModel)]="userLogin.password"></ion-input>
+      </ion-item>
+
+      <ion-button class="ion-margin-top" color="danger" expand="block" (click)="login()">
+        Log in with Email
+      </ion-button>
+
+      <a href="#">Esqueceu sua senha?</a>
+    </div>
+
+    <p>Não tem uma conta?</p>
+
+    <a class="nav-link" href="/register">Criar conta</a>
+  </div>
+</ion-content>

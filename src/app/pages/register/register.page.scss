@@ -1,0 +1,59 @@
+.container {
+  background: url('../../../assets/img/bg.svg') no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  padding: 30px 10px 30px 10px;
+
+  /*======= CONTAINER - P =======*/
+  p {
+      margin: 20px 0 10px 0;
+  }
+
+  a {
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+  }
+
+  /*======= CONTAINER - DIV LOGIN =======*/
+  div.register {
+      width: 90%;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #FFF;
+      border-radius: 5px;
+  }
+
+  div.register ion-button {
+      margin: 10px 0 20px 0;
+      --border-color: var(--ion-color-warning-contrast);
+      color: #000;
+      --border-width: 1px;
+  }
+
+  div.register ion-button img {
+      margin-right: 5px;
+  }
+
+  div.register p.break {
+      display: inline-block;
+      margin: 10px;
+  }
+
+  div.register p.break::before,
+  div.register p.break::after {
+      content: "";
+      display: inline-block;
+      margin: 2px 5px;
+      width: 100px;
+      height: 1px;
+      background-color: #000;
+  }
+
+  div.register p {
+      margin: 25px 0 25px 0;
+  }
+
+}

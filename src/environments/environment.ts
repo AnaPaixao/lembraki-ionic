@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  firebaseConfig : {
+  apiKey: 'AIzaSyByoM36og88KnyJjC04_hSKyBDTVbrxRBg',
+  authDomain: 'lembraki-ionic.firebaseapp.com',
+  projectId: 'lembraki-ionic',
+  storageBucket: 'lembraki-ionic.appspot.com',
+  messagingSenderId: '437233928521',
+  appId: '1:437233928521:web:d04a2088c2eac8b059b298'
+  }
 };
 
 /*
