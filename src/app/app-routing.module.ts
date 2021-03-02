@@ -28,11 +28,33 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: isLogged }
   },
   {
+    path: 'decks',
+    loadChildren: () => import('./pages/decks/decks.module').then( m => m.DecksPageModule)
+  },
+  {
+    path: 'deck',
+    loadChildren: () => import('./pages/deck/deck.module').then( m => m.DeckPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'progress',
+    loadChildren: () => import('./pages/progress/progress.module').then( m => m.ProgressPageModule)
+  },
+  {
+    path: 'start',
+    loadChildren: () => import('./pages/start/start.module').then( m => m.StartPageModule)
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
+  },
+  {
     path: 'group',
-    loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule),
-    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
+    loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
   }
-
 ];
 
 @NgModule({

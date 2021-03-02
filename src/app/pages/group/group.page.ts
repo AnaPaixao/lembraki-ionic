@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output } from '@angular/core';
+import * as EventEmitter from 'events';
 
 @Component({
   selector: 'app-group',
@@ -9,7 +11,6 @@ export class GroupPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
