@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -9,19 +9,34 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  public showMenu: boolean = true;
 
-  constructor(private navCtrl: NavController, public auth: AngularFireAuth, private route: ActivatedRoute){}
+  constructor(
+    private navCtrl: NavController,
+    public auth: AngularFireAuth,
+    private route: Router
+  ) {}
 
-  ngOnInit(){}
+  ngOnInit() {}
+
+  ngAfterContentChecked() {
+    switch (this.route.url) {
+      case '/login':
+      case '/first-page':
+      case '/register':
+        this.showMenu = false;
+        break;
+      default:
+        this.showMenu = true;
+    }
+  }
 
   public appPages = [
     { title: 'Progresso', url: '/progress', icon: 'stats-chart' },
     { title: 'Outro', url: '/progress', icon: 'person' },
-
   ];
 
-  navToProgressPage(){
-    this.navCtrl.navigateForward(['progress'])
+  navToProgressPage() {
+    this.navCtrl.navigateForward(['progress']);
   }
-
 }
