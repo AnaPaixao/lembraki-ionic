@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -26,19 +26,25 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 * {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
-h1 {
-  font-family: 'Lobster Two', cursive;
+h1, h2 {
+  font-family: "Lobster Two", cursive;
 }
 
 .logo {
-  font-family: 'Lobster', cursive !important;
+  font-family: "Lobster", cursive !important;
 }
 
 .alertGroup {
-  input#alert-input-1-0 {
+
+  h2 {
     text-align: center;
+    font-size: 2em !important;
+  }
+  input {
+    text-align: center;
+    font-size: 1.5em !important;
   }
 }

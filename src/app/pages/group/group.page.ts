@@ -15,6 +15,8 @@ export class GroupPage implements OnInit {
 
   groups: Observable<any[]>;
 
+  userId: string;
+
 
   constructor(
     private groupService: GroupService,
@@ -25,7 +27,7 @@ export class GroupPage implements OnInit {
 
   ngOnInit() {
     this.auth.getAuth().authState.subscribe(res=>{
-      console.log(res.uid);
+      this.userId = res.uid;
       // this.groups = this.groupService.getGroups('PyClOxV9wXQj9Jvn4mWJ0TAyir22');
       this.groups = this.groupService.getGroups(res.uid);
     })
@@ -57,7 +59,7 @@ export class GroupPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
-            console.log('Confirm Ok', data);
+            this.groupService.addGroup(this.userId, data.name);
           }
         }
       ]

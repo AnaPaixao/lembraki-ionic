@@ -12,4 +12,14 @@ export class GroupService {
   getGroups(id: string) {
     return this.afs.collection('users').doc(id).collection('group').valueChanges()
   }
+
+  addGroup(idUser, name){
+
+    return this.afs.collection('users').doc(idUser).collection('group').add({
+      name: name,
+      created_at: Date.now(),
+      updated_at: Date.now(),
+    })
+
+  }
 }
