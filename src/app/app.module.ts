@@ -17,7 +17,6 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

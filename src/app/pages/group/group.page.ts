@@ -1,6 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output } from '@angular/core';
-import * as EventEmitter from 'events';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-group',
@@ -8,6 +6,8 @@ import * as EventEmitter from 'events';
   styleUrls: ['./group.page.scss'],
 })
 export class GroupPage implements OnInit {
+
+  groupColor : string = "#AE2121";
 
   constructor() { }
 

@@ -8,12 +8,16 @@ import { GroupPageRoutingModule } from './group-routing.module';
 
 import { GroupPage } from './group.page';
 
+import { ColorPickerModule } from 'ngx-color-picker';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GroupPageRoutingModule
+    GroupPageRoutingModule,
+    ColorPickerModule
   ],
   declarations: [GroupPage]
 })

@@ -26,6 +26,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@ionic/angular": "^5.5.2",
     "firebase": "^8.2.9",
+    "ionic-color-picker": "^1.0.3",
+    "ngx-color-picker": "^11.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
