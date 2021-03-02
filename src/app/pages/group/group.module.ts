@@ -10,6 +10,9 @@ import { GroupPage } from './group.page';
 
 import { ColorPickerModule } from 'ngx-color-picker';
 
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 
 @NgModule({
   imports: [
@@ -17,8 +20,13 @@ import { ColorPickerModule } from 'ngx-color-picker';
     FormsModule,
     IonicModule,
     GroupPageRoutingModule,
-    ColorPickerModule
+    ColorPickerModule,
+    FontAwesomeModule
   ],
   declarations: [GroupPage]
 })
-export class GroupPageModule {}
+export class GroupPageModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}

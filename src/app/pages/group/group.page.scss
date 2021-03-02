@@ -32,3 +32,26 @@
     margin: 0;
   }
 }
+
+ion-footer {
+  position: fixed;
+  bottom:0;
+
+  .toolbar {
+    background-color: var(--ion-color-primary);
+    color: #fff;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-button{
+     font-size: 2rem;
+     --padding-start: 0.5em;
+     --padding-end: 0.5em;
+    }
+
+  }
+}
+
+
