@@ -42,8 +42,12 @@ export class GroupPage implements OnInit {
     console.log(id);
   }
 
-  changeColor(id: string, color: string){
-    console.log(id, color);
+  changeColor(idGroup: string, color: string){
+    try{
+      this.groupService.updateColor(this.userId, idGroup, color)
+    } catch(e){
+      console.error(e);
+    }
   }
 
   async presentGroupAlertInput() {
@@ -69,7 +73,13 @@ export class GroupPage implements OnInit {
           text: 'Ok',
           handler: (data) => {
             data.color = '#AE2121';
-            this.groupService.addGroup(this.userId, <Group>data);
+
+            try{
+              this.groupService.addGroup(this.userId, <Group>data);
+            } catch(e){
+              console.error(e);
+            }
+
           }
         }
       ]

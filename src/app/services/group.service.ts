@@ -14,6 +14,12 @@ export class GroupService {
     return this.afs.collection('users').doc(id).collection<Group>('group').valueChanges({idField: 'id'})
   }
 
+  updateColor(userId: string, groupId: string, color: string){
+    return this.afs.collection('users').doc(userId).collection<any>('group').doc(groupId).update({
+      color: color
+    })
+  }
+
   addGroup(idUser: string, data: Group){
 
     return this.afs.collection('users').doc(idUser).collection('group').add({
