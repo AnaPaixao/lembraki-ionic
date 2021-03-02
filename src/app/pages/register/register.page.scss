@@ -15,10 +15,14 @@
         text-decoration: none;
         font-weight: bold;
     }
+
+    img {
+        margin-left: 10px;
+    }
     /*======= CONTAINER - DIV LOGIN =======*/
     div.register {
         width: 90%;
-        margin: 30px auto;
+        margin: 10px auto;
         padding: 20px;
         background-color: #FFF;
         border-radius: 5px;
