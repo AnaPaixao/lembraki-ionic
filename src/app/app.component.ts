@@ -32,8 +32,8 @@ export class AppComponent {
   }
 
   public appPages = [
+    { title: 'Conjuntos', url: '/group', icon: 'grid' },
     { title: 'Progresso', url: '/progress', icon: 'stats-chart' },
-    { title: 'Outro', url: '/progress', icon: 'person' },
   ];
 
   navToProgressPage() {
