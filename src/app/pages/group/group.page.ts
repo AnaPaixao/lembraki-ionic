@@ -1,3 +1,4 @@
+import { Group } from './../../classes/group';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { GroupService } from './../../services/group.service';
@@ -11,9 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class GroupPage implements OnInit {
 
-  groupColor : string = "#AE2121";
+  groupColor: string = "#AE2121";
 
-  groups: Observable<any[]>;
+  groups: Observable<Group[]>;
 
   userId: string;
 
@@ -59,7 +60,8 @@ export class GroupPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
-            this.groupService.addGroup(this.userId, data.name);
+            data.color = '#AE2121';
+            this.groupService.addGroup(this.userId, <Group>data);
           }
         }
       ]
