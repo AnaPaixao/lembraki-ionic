@@ -3,8 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
-const toLogin = () => redirectUnauthorizedTo(['/group']);
-const isLogged = () => redirectLoggedInTo(['/first-page']);
+const toLogin = () => redirectUnauthorizedTo(['/first-page']);
+const isLogged = () => redirectLoggedInTo(['/group']);
 
 const routes: Routes = [
   {
@@ -29,31 +29,38 @@ const routes: Routes = [
   },
   {
     path: 'decks',
-    loadChildren: () => import('./pages/decks/decks.module').then( m => m.DecksPageModule)
+    loadChildren: () => import('./pages/decks/decks.module').then( m => m.DecksPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
     path: 'deck',
-    loadChildren: () => import('./pages/deck/deck.module').then( m => m.DeckPageModule)
+    loadChildren: () => import('./pages/deck/deck.module').then( m => m.DeckPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
     path: 'progress',
-    loadChildren: () => import('./pages/progress/progress.module').then( m => m.ProgressPageModule)
+    loadChildren: () => import('./pages/progress/progress.module').then( m => m.ProgressPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
     path: 'start',
-    loadChildren: () => import('./pages/start/start.module').then( m => m.StartPageModule)
+    loadChildren: () => import('./pages/start/start.module').then( m => m.StartPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
     path: 'logout',
-    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
     path: 'group',
-    loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
+    loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   }
 ];
 

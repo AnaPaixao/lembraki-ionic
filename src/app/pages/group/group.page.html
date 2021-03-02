@@ -9,8 +9,8 @@
 
 <ion-content>
 
-  <div *ngFor="let group of groups | async" class="ion-margin-top group" [style.backgroundColor]="color.value">
-    <input #color type="color" [(ngModel)]="groupColor">
+<div *ngFor="let group of groups | async" (click)="updateGroup(group.id)" class="ion-margin-top group" [style.backgroundColor]="color.value">
+    <input #color (input)="changeColor(group.id, group.color)"  type="color" clickStopPropagation [(ngModel)]="group.color">
     <h1>{{ group.name }}</h1>
   </div>
 

@@ -38,6 +38,14 @@ export class GroupPage implements OnInit {
     this.presentGroupAlertInput();
   }
 
+  updateGroup(id: string){
+    console.log(id);
+  }
+
+  changeColor(id: string, color: string){
+    console.log(id, color);
+  }
+
   async presentGroupAlertInput() {
     const alert = await this.alertController.create({
       cssClass: 'alertGroup',

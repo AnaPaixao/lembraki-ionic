@@ -1,3 +1,5 @@
+import { ClickStopPropagationDirective } from './../../directives/global/click-stop-propagation.directive';
+import { GroupPage } from './group.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -5,8 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { GroupPageRoutingModule } from './group-routing.module';
-
-import { GroupPage } from './group.page';
 
 import { ColorPickerModule } from 'ngx-color-picker';
 
@@ -23,7 +23,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     ColorPickerModule,
     FontAwesomeModule
   ],
-  declarations: [GroupPage]
+  declarations: [GroupPage, ClickStopPropagationDirective]
 })
 export class GroupPageModule {
   constructor(library: FaIconLibrary) {

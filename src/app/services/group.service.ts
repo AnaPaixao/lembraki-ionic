@@ -1,5 +1,4 @@
 import { Group } from './../classes/group';
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from "firebase/app";
@@ -9,10 +8,10 @@ import firebase from "firebase/app";
 })
 export class GroupService {
 
-  constructor(private auth: AuthService, private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore) {}
 
   getGroups(id: string) {
-    return this.afs.collection('users').doc(id).collection<Group>('group').valueChanges()
+    return this.afs.collection('users').doc(id).collection<Group>('group').valueChanges({idField: 'id'})
   }
 
   addGroup(idUser: string, data: Group){
