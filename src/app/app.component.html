@@ -19,11 +19,14 @@
             <ion-item routerDirection="root" routerLink="/profile" lines="none" detail="false"
               routerLinkActive="selected">
               <ion-avatar slot="start">
-                <ion-img src="{{user.photoURL ? user.photoURL : ''}}" alt="{{user.displayName}}"></ion-img>
+                <ion-img src="{{user.photoURL ? user.photoURL : 'assets/img/default-profile.png'}}" alt="{{user.displayName}}"></ion-img>
               </ion-avatar>
-              <ion-label>
+              <ion-label *ngIf="user.displayName">
                 {{ user.displayName }}
                 <div><small>{{ user.email }}</small></div>
+              </ion-label>
+              <ion-label *ngIf="!user.displayName">
+                <strong>{{ user.email }}</strong>
               </ion-label>
             </ion-item>
 
@@ -41,7 +44,7 @@
               <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false"
                 routerLinkActive="selected">
                 <ion-avatar slot="start">
-                  <ion-img src="assets/user.png" alt="Faça Login"></ion-img>
+                  <ion-img src="assets/default-profile.png" alt="Faça Login"></ion-img>
                 </ion-avatar>
                 <ion-label>
                   Faça login
