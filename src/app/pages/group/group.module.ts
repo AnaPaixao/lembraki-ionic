@@ -8,8 +8,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { GroupPageRoutingModule } from './group-routing.module';
 
-import { ColorPickerModule } from 'ngx-color-picker';
-
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,7 +18,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     FormsModule,
     IonicModule,
     GroupPageRoutingModule,
-    ColorPickerModule,
     FontAwesomeModule
   ],
   declarations: [GroupPage, ClickStopPropagationDirective]
