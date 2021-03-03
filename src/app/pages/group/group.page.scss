@@ -6,12 +6,13 @@ ion-content {
   display: flex;
   position: relative;
   background-color: var(--ion-color-primary);
-  height: 200px;
+  // width: 320px;
+  height: 140px;
   align-items: center;
   justify-content: center;
-  margin: 10px 10px;
-  border-radius: 10px;
-  box-shadow: 3px 3px 0 black;
+  margin: 20px 25px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 rgb(56, 56, 56);
   outline: none;
 
   input[type="color"] {
@@ -20,7 +21,7 @@ ion-content {
     border: none;
     position: absolute;
     right: 12px;
-    top: 20px;
+    top: 14px;
   }
 
   input[type="color"]::-webkit-color-swatch-wrapper {
@@ -31,10 +32,11 @@ ion-content {
     border: none;
   }
 
-  h1 {
+  h3 {
     color: #fff;
-    font-size: 3rem;
+    font-size: 1.7rem;
     margin: 0;
+    text-align: center;
   }
 }
 

@@ -12,7 +12,7 @@
     [style.backgroundColor]="color.value">
     <input #color (focusout)="changeColor(group.id, group.color)" type="color" clickStopPropagation
       [(ngModel)]="group.color" />
-    <h1>{{ group.name }}</h1>
+    <h3>{{ group.name }}</h3>
   </div>
 
   <ion-footer>
