@@ -9,9 +9,19 @@
 
 <ion-content>
 
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let deck of decks | async">
+        {{ deck.name }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
   <ion-footer>
     <div class="toolbar">
-      <ion-button mode="md" color="success" shape="round">
+      <ion-button mode="md" color="success" shape="round" (click)="addDeck()">
         <ion-icon slot="start" slot="icon-only" style="font-size: 1em" name="add"></ion-icon>
       </ion-button>
     </div>

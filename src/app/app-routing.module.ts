@@ -28,11 +28,6 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: isLogged }
   },
   {
-    path: 'decks',
-    loadChildren: () => import('./pages/decks/decks.module').then( m => m.DecksPageModule),
-    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
-  },
-  {
     path: 'decks/:groupId',
     loadChildren: () => import('./pages/decks/decks.module').then( m => m.DecksPageModule),
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
@@ -66,7 +61,8 @@ const routes: Routes = [
     path: 'group',
     loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule),
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
-  },  {
+  },
+  {
     path: 'modalone',
     loadChildren: () => import('./modalone/modalone.module').then( m => m.ModalonePageModule)
   }
