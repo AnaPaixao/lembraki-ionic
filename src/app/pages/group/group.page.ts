@@ -1,5 +1,5 @@
 import { Group } from './../../classes/group';
-import { AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { GroupService } from './../../services/group.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,10 +11,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./group.page.scss'],
 })
 export class GroupPage implements OnInit {
+  
+  groups: Observable<Group[]>;
+  groupsOrderNameDesc: boolean = false;
+  groupsOrderCreatedAtDesc: boolean = true;
+  groupsOrderUpdatedAtDesc: boolean = false;
+
 
   groupColor: string = "#AE2121";
 
-  groups: Observable<Group[]>;
 
   userId: string;
 
@@ -22,7 +27,8 @@ export class GroupPage implements OnInit {
   constructor(
     private groupService: GroupService,
     private auth: AuthService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private actionSheetController: ActionSheetController
   ) {
   }
 
@@ -87,5 +93,65 @@ export class GroupPage implements OnInit {
 
     await alert.present();
   }
+
+  async filterSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      mode: 'ios',
+      header: 'Filtros',
+      cssClass: 'filter-groups',
+      buttons: [{
+      text: `Ultimos Alterados`,
+        handler: () => {
+          try {
+            this.groups = this.groupService.filter('updated_at',this.userId, this.groupsOrderUpdatedAtDesc);
+            this.groupsOrderUpdatedAtDesc = !this.groupsOrderUpdatedAtDesc;
+            this.groupsOrderNameDesc = false;
+            this.groupsOrderCreatedAtDesc = false;
+          } catch(e){
+            console.error(e);
+          }
+        }
+      },{
+        text: 'Ordem Alfabética',
+        handler: () => {
+
+          try {
+            this.groups = this.groupService.filter('name', this.userId, this.groupsOrderNameDesc);
+            this.groupsOrderNameDesc = !this.groupsOrderNameDesc;
+            this.groupsOrderCreatedAtDesc = false;
+            this.groupsOrderUpdatedAtDesc = false;
+          } catch(e){
+            console.error(e);
+          }
+
+        }
+      }, {
+        text: 'Data de Criação',
+        handler: () => {
+          
+          try {
+            this.groups = this.groupService.filter('created_at',this.userId, this.groupsOrderCreatedAtDesc);
+            this.groupsOrderCreatedAtDesc = !this.groupsOrderCreatedAtDesc;
+            this.groupsOrderNameDesc = false;
+            this.groupsOrderUpdatedAtDesc = false;
+          } catch(e){
+            console.error(e);
+          }
+
+
+        }
+      },{
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+
+
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
 
 }
