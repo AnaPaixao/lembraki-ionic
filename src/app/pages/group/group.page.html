@@ -7,14 +7,33 @@
     <ion-button (click)="filterSheet()" slot="end" color="tertiary" class="ion-margin-end">
       <fa-icon [icon]="['fas', 'filter']" style="color: #fff"></fa-icon>
     </ion-button>
-    
+
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-margin-bottom">
-  <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]"  (click)="updateGroup(group.id)" class="ion-margin-top group"
-    [style.backgroundColor]="color.value">
+  <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]" (click)="updateGroup(group.id)"
+    class="ion-margin-top group" [style.backgroundColor]="color.value">
     <input #color (focusout)="changeColor(group.id, group.color)" type="color" clickStopPropagation
       [(ngModel)]="group.color" />
+      <div clickStopPropagation class="dots">
+        <ion-icon slot="start" name="ellipsis-vertical"></ion-icon>
+      </div>
+      <div class="group-options" clickStopPropagation>
+        <ion-list lines="none">
+          <ion-item button class="my-list">
+            <ion-icon name="create-outline"></ion-icon>
+            <ion-label>Renomear</ion-label>
+          </ion-item>
+          <ion-item button class="my-list">
+            <ion-icon name="trash"></ion-icon>
+            <ion-label>Deletar</ion-label>
+          </ion-item>
+          <ion-item button>
+            <ion-icon name="archive"></ion-icon>
+            <ion-label>Arquivar</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     <h3>{{ group.name }}</h3>
   </div>
 
