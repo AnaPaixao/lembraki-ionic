@@ -1,5 +1,6 @@
+import { ModalonePage } from './../../modalone/modalone.page';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
@@ -23,8 +24,14 @@ export class RegisterPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     public auth: AngularFireAuth,
-    private app: AuthService
-  ){}
+    private app: AuthService,
+  
+  
+
+    //modal 
+    private modalCtrl: ModalController
+  
+    ){}
 
   ngOnInit() {
   }
@@ -83,5 +90,17 @@ export class RegisterPage implements OnInit {
       )
       .catch((error) => { console.log(error); });
   }
+
+  async showModalOne() {
+
+    const modal = await this.modalCtrl.create({
+      component: ModalonePage
+    });
+ 
+    modal.present();
+
+  }
+
+  async showModalTwo(){}
 
 }

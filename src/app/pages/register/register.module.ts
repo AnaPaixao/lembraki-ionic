@@ -1,3 +1,4 @@
+import { ModalonePage } from './../../modalone/modalone.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { RegisterPage } from './register.page';
     IonicModule,
     RegisterPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage, ModalonePage],
+  entryComponents: [ModalonePage]
 })
 export class RegisterPageModule {}

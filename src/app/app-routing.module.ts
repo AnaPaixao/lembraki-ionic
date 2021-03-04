@@ -66,7 +66,11 @@ const routes: Routes = [
     path: 'group',
     loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule),
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
+  },  {
+    path: 'modalone',
+    loadChildren: () => import('./modalone/modalone.module').then( m => m.ModalonePageModule)
   }
+
 ];
 
 @NgModule({
