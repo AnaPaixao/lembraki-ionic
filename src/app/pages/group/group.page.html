@@ -15,7 +15,7 @@
     class="ion-margin-top group" [style.backgroundColor]="color.value">
     <input #color (focusout)="changeColor(group.id, group.color)" type="color" clickStopPropagation
       [(ngModel)]="group.color" />
-      <div clickStopPropagation class="dots">
+      <div clickStopPropagation class="dots" (click)="showList($event, group)">
         <ion-icon slot="start" name="ellipsis-vertical"></ion-icon>
       </div>
       <div class="group-options" clickStopPropagation>

@@ -1,8 +1,10 @@
+import { ListComponent } from './list/list.component';
 import { Group } from './../../classes/group';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { GroupService } from './../../services/group.service';
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./group.page.scss'],
 })
 export class GroupPage implements OnInit {
-  
+
   groups: Observable<Group[]>;
   groupsOrderNameDesc: boolean = false;
   groupsOrderCreatedAtDesc: boolean = true;
@@ -28,7 +30,8 @@ export class GroupPage implements OnInit {
     private groupService: GroupService,
     private auth: AuthService,
     private alertController: AlertController,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    public popoverController: PopoverController
   ) {
   }
 
@@ -128,7 +131,7 @@ export class GroupPage implements OnInit {
       }, {
         text: 'Data de Criação',
         handler: () => {
-          
+
           try {
             this.groups = this.groupService.filter('created_at',this.userId, this.groupsOrderCreatedAtDesc);
             this.groupsOrderCreatedAtDesc = !this.groupsOrderCreatedAtDesc;
@@ -153,5 +156,15 @@ export class GroupPage implements OnInit {
     await actionSheet.present();
   }
 
+  async showList(ev: Event, data: Group){
+    const popover = await this.popoverController.create({
+      component: ListComponent,
+      componentProps: {group: data},
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
 
 }
