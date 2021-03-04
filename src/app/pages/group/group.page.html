@@ -4,9 +4,12 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Conjuntos</ion-title>
+    <ion-button (click)="filterSheet()" slot="end" color="tertiary" class="ion-margin-end">
+      <fa-icon [icon]="['fas', 'filter']" style="color: #fff"></fa-icon>
+    </ion-button>
+    
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-margin-bottom">
   <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]"  (click)="updateGroup(group.id)" class="ion-margin-top group"
     [style.backgroundColor]="color.value">

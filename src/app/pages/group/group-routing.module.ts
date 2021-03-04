@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { GroupPage } from './group.page';
 
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 const routes: Routes = [
   {
     path: '',
@@ -11,7 +14,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes),
+    FontAwesomeModule],
   exports: [RouterModule],
 })
-export class GroupPageRoutingModule {}
+export class GroupPageRoutingModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}

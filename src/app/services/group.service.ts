@@ -20,6 +20,17 @@ export class GroupService {
     })
   }
 
+  filter(fieldName: string, userId: string, orderDesc: boolean) {
+
+    let field = fieldName;
+
+    if(field == 'created_at' || field == 'updated_at'){
+      orderDesc = !orderDesc
+    }
+
+    return this.afs.collection('users').doc(userId).collection<Group>('group', ref => ref.orderBy(field, orderDesc == true ? 'desc' : 'asc')).valueChanges({idField: 'id'});
+  }
+
   addGroup(idUser: string, data: Group){
 
     return this.afs.collection('users').doc(idUser).collection('group').add({
