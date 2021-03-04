@@ -1,23 +1,28 @@
 <ion-content>
-    <div class="container">
-        <div class="main-text">
-            <img src="/assets/img/logo.png" alt="Logo flash card">
-            <ion-title class="logo">Lembraki</ion-title>
-        </div>
+  <img src="/assets/img/bg/right-side-top.png" id="right-top">
+  <img src="/assets/img/bg/left-side-top.png" id="left-top">
+  <img src="/assets/img/bg/right-side-bottom.png" id="right-bottom">
+  <img src="/assets/img/bg/left-side-bottom.png" id="left-bottom">
 
-        <div class="buttons">
-            <a class="nav-link" href="/register">
-                <ion-button expand="block" color="tertiary">Sign Up</ion-button>
-            </a>
-            <a class="nav-link" href="/login">
-                <ion-button expand="block" fill="outline" color="tertiary" class="ion-margin-top">Log in</ion-button>
-            </a>
-            <a class="nav-link" (click)="aboutAlert()">   
-                <ion-button class="about">
-                    <ion-icon name="information-circle-outline"></ion-icon>
-                </ion-button>
-            </a>
-        </div>
-
+  <div class="container">
+    <div class="main-text">
+      <img src="/assets/img/logo.png" alt="Logo flash card">
+      <ion-title class="logo">Lembraki</ion-title>
     </div>
+
+    <div class="buttons">
+      <a class="nav-link" href="/register">
+        <ion-button expand="block" color="tertiary">Sign Up</ion-button>
+      </a>
+      <a class="nav-link" href="/login">
+        <ion-button expand="block" fill="outline" color="tertiary" class="ion-margin-top">Log in</ion-button>
+      </a>
+      <a class="nav-link" (click)="aboutAlert()">
+        <ion-button class="about">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </a>
+    </div>
+
+  </div>
 </ion-content>
