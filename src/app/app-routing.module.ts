@@ -64,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: 'modalone',
-    loadChildren: () => import('./modalone/modalone.module').then( m => m.ModalonePageModule)
+    loadChildren: () => import('./pages/register/modalone/modalone.module').then( m => m.ModalonePageModule)
   }
 
 ];

@@ -159,7 +159,7 @@ export class GroupPage implements OnInit {
   async showList(ev: Event, data: Group){
     const popover = await this.popoverController.create({
       component: ListComponent,
-      componentProps: {group: data},
+      componentProps: {group: data, userId: this.userId},
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true

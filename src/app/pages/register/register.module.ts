@@ -1,4 +1,4 @@
-import { ModalonePage } from './../../modalone/modalone.page';
+import { ModalonePage } from './modalone/modalone.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

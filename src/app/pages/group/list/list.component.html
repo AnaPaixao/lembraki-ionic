@@ -1,13 +1,13 @@
 <ion-list>
-  <ion-item button detail="false">
+  <ion-item button (click)="rename()">
     <ion-icon name="create-outline"></ion-icon>
     Renomear
   </ion-item>
-  <ion-item button>
+  <ion-item button (click)="delete()">
     <ion-icon name="trash"></ion-icon>
     Deletar
   </ion-item>
-  <ion-item button>
+  <ion-item button (click)="archive()">
     <ion-icon name="archive"></ion-icon>
     Arquivar
   </ion-item>

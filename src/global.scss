@@ -29,7 +29,8 @@
   font-family: "Ubuntu", sans-serif;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: "Lobster Two", cursive;
 }
 
@@ -37,8 +38,14 @@ h1, h2 {
   font-family: "Lobster", cursive !important;
 }
 
+/* toast default position */
+
+.default-toast {
+  transform: translateY(-10vh) !important;
+}
+
+
 .alertGroup {
-  
   h2 {
     text-align: center;
     font-size: 2em !important;
@@ -49,12 +56,11 @@ h1, h2 {
   }
 }
 
-/* First-Page */ 
+/* First-Page */
 
-.about-alert-first-page{
+.about-alert-first-page {
   h2 {
     font-family: "Ubuntu", sans-serif;
-    
   }
 }
 
@@ -63,5 +69,22 @@ h1, h2 {
 .filter-groups {
   span {
     color: #000;
+  }
+}
+
+/* Alert Confirm Delete Group in List Component */
+
+.alert-confirm-delete {
+  h2.alert-title {
+    font-size: 1.6rem;
+  }
+
+  div.alert-message {
+    font-size: 1.2rem;
+  }
+
+  span {
+    color: --ion-color-tertiary;
+    font-weight: bold;
   }
 }

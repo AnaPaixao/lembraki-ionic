@@ -1,4 +1,14 @@
 img {
     display: block;
     margin: auto;
+    border-radius: 50%;
+    box-shadow: 3px 6px 7px rgb(0 0 0 / 30%);
+}
+
+ion-card {
+  padding: 20px;
+  box-shadow: 3px 0px 10px 5px rgb(0 0 0 / 20%);
+  ion-card-header {
+    text-align: center;
+  }
 }
