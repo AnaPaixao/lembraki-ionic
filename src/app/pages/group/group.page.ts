@@ -1,6 +1,7 @@
+import { ArchivedPage } from './archived/archived.page';
 import { ListComponent } from './list/list.component';
 import { Group } from './../../classes/group';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { GroupService } from './../../services/group.service';
 import { Component, OnInit } from '@angular/core';
@@ -31,7 +32,8 @@ export class GroupPage implements OnInit {
     private auth: AuthService,
     private alertController: AlertController,
     private actionSheetController: ActionSheetController,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private modalController: ModalController
   ) {
   }
 
@@ -165,6 +167,15 @@ export class GroupPage implements OnInit {
       translucent: true
     });
     return await popover.present();
+  }
+
+  async archivedModal() {
+    const modal = await this.modalController.create({
+      component: ArchivedPage,
+      cssClass: 'my-custom-class',
+      componentProps: {userId: this.userId}
+    });
+    return await modal.present();
   }
 
 }

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Conjuntos arquivados</ion-title>
+    <ion-icon (click)="close()" slot="end" class="ion-margin-end" style="font-size: 1.4rem;" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let archivedGroup of archivedGroups">
+      <ion-label>
+        <h4 style="font-size: 1.5rem;">{{ archivedGroup.name }}</h4>
+        <p><b>Arquivado em: </b></p>
+        <p>{{ archivedGroup.updated_at | date: 'dd/MM/yyyy' }}</p>
+        <p>{{ archivedGroup.updated_at | date: 'HH:mm:ss' }}</p>
+      </ion-label>
+      <ion-icon (click)="undo(archivedGroup.id)" style="font-size: 2rem;" slot="end" name="arrow-undo-circle"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

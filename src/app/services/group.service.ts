@@ -10,8 +10,8 @@ export class GroupService {
 
   constructor(private afs: AngularFirestore) {}
 
-  getGroups(id: string) {
-    return this.afs.collection('users').doc(id).collection<Group>('group', ref => ref.where('archived', '==', false)).valueChanges({idField: 'id'})
+  getGroups(id: string, archived: boolean = false) {
+    return this.afs.collection('users').doc(id).collection<Group>('group', ref => ref.where('archived', '==', archived)).valueChanges({idField: 'id'})
   }
 
   updateColor(userId: string, groupId: string, color: string){

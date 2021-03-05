@@ -5,6 +5,6 @@ export class Deck {
   direction: string;
   in_progress: boolean;
   progress: number;
-  created_at: number;
-  updated_at: number;
+  created_at: any;
+  updated_at: any;
 }

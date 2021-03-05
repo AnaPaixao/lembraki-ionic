@@ -4,6 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Conjuntos</ion-title>
+    <ion-button slot="end" (click)="archivedModal()" color="tertiary" class="ion-margin-end">
+      <ion-icon slot="icon-only" style="color: #fff;" name="archive"></ion-icon>
+    </ion-button>
     <ion-button (click)="filterSheet()" slot="end" color="tertiary" class="ion-margin-end">
       <fa-icon [icon]="['fas', 'filter']" style="color: #fff"></fa-icon>
     </ion-button>

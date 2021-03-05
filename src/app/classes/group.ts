@@ -3,6 +3,6 @@ export class Group {
   name: string;
   color: string;
   archived: boolean;
-  created_at: number;
-  updated_at: number;
+  created_at: any;
+  updated_at: any;
 }

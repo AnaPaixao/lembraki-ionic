@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: '',
     component: GroupPage
+  },  {
+    path: 'archived',
+    loadChildren: () => import('./archived/archived.module').then( m => m.ArchivedPageModule)
   }
+
 ];
 
 @NgModule({
