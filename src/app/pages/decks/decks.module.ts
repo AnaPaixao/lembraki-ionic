@@ -8,13 +8,21 @@ import { DecksPageRoutingModule } from './decks-routing.module';
 
 import { DecksPage } from './decks.page';
 
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DecksPageRoutingModule
+    DecksPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [DecksPage]
 })
-export class DecksPageModule {}
+export class DecksPageModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}

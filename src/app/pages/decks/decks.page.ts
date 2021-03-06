@@ -1,4 +1,5 @@
-import { AlertController } from '@ionic/angular';
+import { ArchivedPage } from './archived/archived.page';
+import { AlertController, ActionSheetController, PopoverController, ModalController } from '@ionic/angular';
 import { Deck } from './../../classes/deck';
 import { DecksService } from './../../services/decks.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,7 +17,10 @@ export class DecksPage implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private decksService: DecksService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private actionSheetController: ActionSheetController,
+    public popoverController: PopoverController,
+    public modalController: ModalController
   ) {}
 
   userId: string;
@@ -24,15 +28,17 @@ export class DecksPage implements OnInit {
 
   decks: Observable<Deck[]>;
 
+
+  //Filter
+  decksOrderNameDesc: boolean = false;
+  decksOrderCreatedAtDesc: boolean = true;
+  decksOrderUpdatedAtDesc: boolean = false;
+
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
-      // this.decks = this.decksService.getDecks(
-      //   'PyClOxV9wXQj9Jvn4mWJ0TAyir22',
-      //   'itx0EJytRV27dRkggmG4'
-      // );
       this.decks = this.decksService.getDecks(res.uid, this.groupId);
     });
   }
@@ -65,7 +71,7 @@ export class DecksPage implements OnInit {
           text: 'Ok',
           handler: (data) => {
             try {
-              this.decksService.addDeck(this.userId, this.groupId, <Deck>data)
+              this.decksService.addDeck(this.userId, this.groupId, <Deck>data);
             } catch (e) {
               console.error(e);
             }
@@ -75,5 +81,65 @@ export class DecksPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async filterSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      mode: 'ios',
+      header: 'Filtros',
+      cssClass: 'filter-groups',
+      buttons: [{
+      text: `Ultimos Alterados`,
+        handler: () => {
+          // try {
+          //   this.groups = this.groupService.filter('updated_at',this.userId, this.groupsOrderUpdatedAtDesc);
+          //   this.groupsOrderUpdatedAtDesc = !this.groupsOrderUpdatedAtDesc;
+          //   this.groupsOrderNameDesc = false;
+          //   this.groupsOrderCreatedAtDesc = false;
+          // } catch(e){
+          //   console.error(e);
+          // }
+        }
+      },{
+        text: 'Ordem Alfabética',
+        handler: () => {
+          // try {
+          //   this.groups = this.groupService.filter('name', this.userId, this.groupsOrderNameDesc);
+          //   this.groupsOrderNameDesc = !this.groupsOrderNameDesc;
+          //   this.groupsOrderCreatedAtDesc = false;
+          //   this.groupsOrderUpdatedAtDesc = false;
+          // } catch(e){
+          //   console.error(e);
+          // }
+        }
+      }, {
+        text: 'Data de Criação',
+        handler: () => {
+          // try {
+          //   this.groups = this.groupService.filter('created_at',this.userId, this.groupsOrderCreatedAtDesc);
+          //   this.groupsOrderCreatedAtDesc = !this.groupsOrderCreatedAtDesc;
+          //   this.groupsOrderNameDesc = false;
+          //   this.groupsOrderUpdatedAtDesc = false;
+          // } catch(e){
+          //   console.error(e);
+          // }
+        }
+      },{
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {}
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  async archivedModal() {
+    const modal = await this.modalController.create({
+      component: ArchivedPage,
+      cssClass: 'my-custom-class',
+      componentProps: {userId: this.userId, groupId: this.groupId}
+    });
+    return await modal.present();
   }
 }

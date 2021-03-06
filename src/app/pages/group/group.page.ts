@@ -20,12 +20,7 @@ export class GroupPage implements OnInit {
   groupsOrderCreatedAtDesc: boolean = true;
   groupsOrderUpdatedAtDesc: boolean = false;
 
-
-  groupColor: string = "#AE2121";
-
-
   userId: string;
-
 
   constructor(
     private groupService: GroupService,
@@ -40,17 +35,12 @@ export class GroupPage implements OnInit {
   ngOnInit() {
     this.auth.getAuth().authState.subscribe(res=>{
       this.userId = res.uid;
-      // this.groups = this.groupService.getGroups('PyClOxV9wXQj9Jvn4mWJ0TAyir22');
       this.groups = this.groupService.getGroups(res.uid);
     })
   }
 
   addGroup(){
     this.presentGroupAlertInput();
-  }
-
-  updateGroup(id: string){
-    console.log(id);
   }
 
   changeColor(idGroup: string, color: string){

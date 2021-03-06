@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: DecksPage
+  },  {
+    path: 'archived',
+    loadChildren: () => import('./archived/archived.module').then( m => m.ArchivedPageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Deck } from './../classes/deck';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from "firebase/app";
@@ -8,13 +8,26 @@ import firebase from "firebase/app";
 })
 export class DecksService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(
+    private afs: AngularFirestore
+  ) { }
 
-  getDecks(userId: string, groupId: string){
-    return this.afs.collection('users').doc(userId).collection('group').doc(groupId).collection<Deck>('decks').valueChanges({idField: 'id'})
+  getDeck(userId: string, groupId: string, deckId: string){
+    return this.afs
+    .collection('users').doc(userId)
+    .collection('group').doc(groupId)
+    .collection<Deck>('decks').doc(deckId)
+    .valueChanges({idField: 'id'})
   }
 
-  addDeck(userId: string, groupId: string, data: Deck){
+  getDecks(userId: string, groupId: string) {
+    return this.afs
+    .collection('users').doc(userId)
+    .collection('group').doc(groupId)
+    .collection<Deck>('decks').valueChanges({ idField: 'id' })
+  }
+
+  addDeck(userId: string, groupId: string, data: Deck) {
 
     return this.afs.collection('users').doc(userId).collection('group').doc(groupId).collection('decks').add({
       name: data.name,
@@ -22,9 +35,57 @@ export class DecksService {
       direction: '',
       in_progress: false,
       progress: 0,
+      archived: false,
       created_at: firebase.firestore.FieldValue.serverTimestamp(),
       updated_at: firebase.firestore.FieldValue.serverTimestamp(),
     })
 
   }
+
+  updateDeck(userId: string, groupId: string, deckId: string, data: Deck) {
+
+    data.updated_at = firebase.firestore.FieldValue.serverTimestamp();
+
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('groups').doc(groupId)
+      .collection('decks').doc(deckId)
+      .update(data);
+  }
+
+  deleteDeck(userId: string, groupId: string, deckId: string) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('groups').doc(groupId)
+      .collection('decks').doc(deckId)
+      .delete();
+  }
+
+  toggleArchived(userId: string, groupId: string, deckId: string, archived: boolean) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').doc(deckId)
+      .update({
+        archived: !archived,
+        updated_at: firebase.firestore.FieldValue.serverTimestamp()
+      })
+  }
+
+  filter(fieldName: string, userId: string, groupId: string, orderDesc: boolean) {
+    let field = fieldName;
+
+    if (field == 'created_at' || field == 'updated_at') {
+      orderDesc = !orderDesc
+    }
+
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection<Deck>('decks', ref => ref
+        .where('archived', '==', false)
+        .orderBy(field, orderDesc == true ? 'desc' : 'asc'))
+      .valueChanges({ idField: 'id' });
+  }
+
 }
