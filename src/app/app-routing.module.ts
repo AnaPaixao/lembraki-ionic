@@ -28,12 +28,12 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: isLogged }
   },
   {
-    path: 'decks/:groupId',
+    path: 'decks/:groupId/:groupName',
     loadChildren: () => import('./pages/decks/decks.module').then( m => m.DecksPageModule),
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },
   {
-    path: 'deck',
+    path: 'deck/',
     loadChildren: () => import('./pages/deck/deck.module').then( m => m.DeckPageModule),
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: toLogin }
   },

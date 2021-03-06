@@ -14,7 +14,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-margin-bottom">
-  <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]"
+  <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id, group.name]"
     class="ion-margin-top group" [style.backgroundColor]="color.value">
     <input #color (focusout)="changeColor(group.id, group.color)" type="color" clickStopPropagation
       [(ngModel)]="group.color" />

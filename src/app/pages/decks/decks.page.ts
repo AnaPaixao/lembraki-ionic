@@ -26,6 +26,7 @@ export class DecksPage implements OnInit {
 
   userId: string;
   groupId: string;
+  groupName: string;
 
   decks: Observable<Deck[]>;
 
@@ -37,6 +38,7 @@ export class DecksPage implements OnInit {
 
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
+    this.groupName = this.route.snapshot.paramMap.get('groupName');
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
