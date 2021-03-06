@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
-  <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
-  </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Decks</ion-title>
     <ion-button slot="end" (click)="archivedModal()" color="tertiary" class="ion-margin-end">
       <ion-icon slot="icon-only" style="color: #fff;" name="archive"></ion-icon>
@@ -20,14 +20,27 @@
     <ion-row>
       <ion-col size="6" *ngFor="let deck of decks | async">
         <ion-card color="primary">
+
           <ion-card-header>
-            <ion-card-title>{{ deck.name }}</ion-card-title>
+
+            <ion-card-title>
+              {{ deck.name }}
+            </ion-card-title>
+
             <ion-card-subtitle>
               {{ deck.in_progress ? 'Iniciado' : 'Não Iniciado' }} <br>
               <span *ngIf="true"><b>Progresso:</b> {{ deck.progress + '%' }}</span>
-
             </ion-card-subtitle>
+
+            <div clickStopPropagation class="dots" (click)="showList($event, deck)">
+              <ion-icon slot="start" name="ellipsis-vertical"></ion-icon>
+            </div>
+
           </ion-card-header>
+
+          <ion-card-content>
+            Awesome content
+          </ion-card-content>
 
         </ion-card>
       </ion-col>

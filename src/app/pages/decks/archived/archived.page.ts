@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { DecksService } from './../../../services/decks.service';
+import { ModalController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-archived',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArchivedPage implements OnInit {
 
-  constructor() { }
+  @Input('userId') userId: string;
+  @Input('groupId') groupId: string;
+
+  constructor(
+    private modalCtrl: ModalController,
+    private decksService: DecksService
+  ) { }
 
   ngOnInit() {
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 
 }

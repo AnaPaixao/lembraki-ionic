@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListPopoverComponent } from './list-popover/list-popover.component';
 
 @Component({
   selector: 'app-decks',
@@ -141,5 +142,16 @@ export class DecksPage implements OnInit {
       componentProps: {userId: this.userId, groupId: this.groupId}
     });
     return await modal.present();
+  }
+
+  async showList(ev: Event, data: Deck){
+    const popover = await this.popoverController.create({
+      component: ListPopoverComponent,
+      componentProps: {deck: data, userId: this.userId},
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 }

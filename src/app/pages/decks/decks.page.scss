@@ -2,6 +2,12 @@ ion-content {
   ion-card {
     margin: 0;
     box-shadow: 3px 3px 0 #000;
+
+    .dots{
+      position: absolute;
+      right: 12px;
+      top: 14px;
+    }
   }
 }
 
