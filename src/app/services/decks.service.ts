@@ -12,35 +12,38 @@ export class DecksService {
     private afs: AngularFirestore
   ) { }
 
-  getDeck(userId: string, groupId: string, deckId: string){
+  getDeck(userId: string, groupId: string, deckId: string) {
     return this.afs
-    .collection('users').doc(userId)
-    .collection('group').doc(groupId)
-    .collection<Deck>('decks').doc(deckId)
-    .valueChanges({idField: 'id'})
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection<Deck>('decks').doc(deckId)
+      .valueChanges({ idField: 'id' })
   }
 
-  getDecks(userId: string, groupId: string) {
+  getDecks(userId: string, groupId: string, archived: boolean = false) {
     return this.afs
-    .collection('users').doc(userId)
-    .collection('group').doc(groupId)
-    .collection<Deck>('decks').valueChanges({ idField: 'id' })
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection<Deck>('decks', ref => ref.where('archived', '==', archived)).valueChanges({ idField: 'id' })
   }
 
   addDeck(userId: string, groupId: string, data: Deck) {
 
     console.log(data);
 
-    return this.afs.collection('users').doc(userId).collection('group').doc(groupId).collection('decks').add({
-      name: data.name,
-      color: data.color,
-      direction: '',
-      in_progress: false,
-      progress: 0,
-      archived: false,
-      created_at: firebase.firestore.FieldValue.serverTimestamp(),
-      updated_at: firebase.firestore.FieldValue.serverTimestamp(),
-    })
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').add({
+        name: data.name,
+        color: data.color,
+        direction: '',
+        in_progress: false,
+        progress: 0,
+        archived: false,
+        created_at: firebase.firestore.FieldValue.serverTimestamp(),
+        updated_at: firebase.firestore.FieldValue.serverTimestamp(),
+      })
 
   }
 
@@ -50,7 +53,7 @@ export class DecksService {
 
     return this.afs
       .collection('users').doc(userId)
-      .collection('groups').doc(groupId)
+      .collection('group').doc(groupId)
       .collection('decks').doc(deckId)
       .update(data);
   }

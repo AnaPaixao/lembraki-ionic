@@ -35,6 +35,7 @@ export class ListPopoverComponent implements OnInit {
   }
 
   archive(){
+    this.alertConfirmArchive();
     this.popover.dismiss();
   }
 
@@ -55,6 +56,33 @@ export class ListPopoverComponent implements OnInit {
               // this.groupService.deleteGroup(this.userId, this.group.id);
               this.decksService.deleteDeck(this.userId, this.groupId, this.deck.id);
               this.toastService.presentToast(`O deck [${this.deck.name}] foi excluido!`)
+            } catch (e) {
+              console.error(e);
+            }
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async alertConfirmArchive() {
+    const alert = await this.alertController.create({
+      cssClass: 'alert-confirm-delete',
+      header: 'Confirmar',
+      message: 'Tem certeza que deseja <strong>Arquivar</strong>?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            try {
+              this.decksService.toggleArchived(this.userId, this.groupId, this.deck.id, this.deck.archived);
+              this.toastService.presentToast(`O conjunto [${this.deck.name}] foi arquivado!`)
             } catch (e) {
               console.error(e);
             }
