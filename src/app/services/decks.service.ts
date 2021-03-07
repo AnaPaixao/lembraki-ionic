@@ -20,11 +20,20 @@ export class DecksService {
       .valueChanges({ idField: 'id' })
   }
 
-  getDecks(userId: string, groupId: string, archived: boolean = false) {
-    return this.afs
-      .collection('users').doc(userId)
-      .collection('group').doc(groupId)
-      .collection<Deck>('decks', ref => ref.where('archived', '==', archived)).valueChanges({ idField: 'id' })
+  getDecks(userId: string, groupId: string, archived: boolean = false, orderBy: string = '') {
+
+    if(orderBy == ''){
+      return this.afs
+        .collection('users').doc(userId)
+        .collection('group').doc(groupId)
+        .collection<Deck>('decks', ref => ref.where('archived', '==', archived)).valueChanges({ idField: 'id' })
+    } else {
+      return this.afs
+        .collection('users').doc(userId)
+        .collection('group').doc(groupId)
+        .collection<Deck>('decks', ref => ref.where('archived', '==', archived).orderBy(orderBy, 'desc')).valueChanges({ idField: 'id' })
+    }
+
   }
 
   addDeck(userId: string, groupId: string, data: Deck) {

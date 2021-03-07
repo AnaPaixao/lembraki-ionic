@@ -24,7 +24,8 @@ export class ArchivedPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.archivedGroupsObservable = this.groupService.getGroups(
       this.userId,
-      true
+      true,
+      'updated_at'
     );
     this.sub = this.archivedGroupsObservable.subscribe((res) => {
       res.map((data) => {

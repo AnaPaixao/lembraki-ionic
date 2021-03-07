@@ -10,19 +10,27 @@ export class GroupService {
 
   constructor(private afs: AngularFirestore) { }
 
-  getGroupOnce(userId: string, groupId: string){
+  getGroupOnce(userId: string, groupId: string) {
     return this.afs
-    .collection('users').doc(userId)
-    .collection('group').doc(groupId)
-    .get();
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .get();
   }
 
-  getGroups(id: string, archived: boolean = false) {
-    return this.afs
-      .collection('users').doc(id)
-      .collection<Group>('group', ref => ref
-        .where('archived', '==', archived))
-      .valueChanges({ idField: 'id' })
+  getGroups(id: string, archived: boolean = false, orderBy: string = '') {
+    if (orderBy == '') {
+      return this.afs
+        .collection('users').doc(id)
+        .collection<Group>('group', ref => ref
+          .where('archived', '==', archived))
+        .valueChanges({ idField: 'id' })
+    } else {
+      return this.afs
+        .collection('users').doc(id)
+        .collection<Group>('group', ref => ref
+          .where('archived', '==', archived).orderBy(orderBy, 'desc'))
+        .valueChanges({ idField: 'id' })
+    }
   }
 
   updateColor(userId: string, groupId: string, color: string) {
