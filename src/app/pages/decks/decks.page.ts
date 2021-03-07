@@ -159,7 +159,7 @@ export class DecksPage implements OnInit {
   async showList(ev: Event, data: Deck){
     const popover = await this.popoverController.create({
       component: ListPopoverComponent,
-      componentProps: {deck: data, userId: this.userId},
+      componentProps: {deck: data, userId: this.userId, groupId: this.groupId},
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true

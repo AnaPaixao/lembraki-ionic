@@ -58,7 +58,7 @@ export class DecksService {
   deleteDeck(userId: string, groupId: string, deckId: string) {
     return this.afs
       .collection('users').doc(userId)
-      .collection('groups').doc(groupId)
+      .collection('group').doc(groupId)
       .collection('decks').doc(deckId)
       .delete();
   }
