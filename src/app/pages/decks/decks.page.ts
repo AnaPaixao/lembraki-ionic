@@ -25,7 +25,7 @@ export class DecksPage implements OnInit {
     private actionSheetController: ActionSheetController,
     public popoverController: PopoverController,
     public modalController: ModalController
-  ) {}
+  ) { }
 
   userId: string;
   groupId: string;
@@ -47,7 +47,7 @@ export class DecksPage implements OnInit {
       this.userId = res.uid;
       this.decks = this.decksService.getDecks(res.uid, this.groupId);
 
-      this.groupService.getGroupOnce(res.uid, this.groupId).subscribe(e=>{
+      this.groupService.getGroupOnce(res.uid, this.groupId).subscribe(e => {
         console.log(e.data())
         this.groupName = e.data().name;
         this.groupColor = e.data().color;
@@ -55,7 +55,7 @@ export class DecksPage implements OnInit {
     });
   }
 
-  addDeck(){
+  addDeck() {
     this.presentDecksAlertInput();
   }
 
@@ -86,7 +86,7 @@ export class DecksPage implements OnInit {
               data.color = this.groupColor;
               this.decksService.addDeck(this.userId, this.groupId, <Deck>data);
             } catch (e) {
-              console.error(e);
+              // console.error(e);
             }
           },
         },
@@ -102,46 +102,46 @@ export class DecksPage implements OnInit {
       header: 'Filtros',
       cssClass: 'filter-groups',
       buttons: [{
-      text: `Ultimos Alterados`,
+        text: `Ultimos Alterados`,
         handler: () => {
-          // try {
-          //   this.groups = this.groupService.filter('updated_at',this.userId, this.groupsOrderUpdatedAtDesc);
-          //   this.groupsOrderUpdatedAtDesc = !this.groupsOrderUpdatedAtDesc;
-          //   this.groupsOrderNameDesc = false;
-          //   this.groupsOrderCreatedAtDesc = false;
-          // } catch(e){
-          //   console.error(e);
-          // }
+          try {
+            this.decks = this.decksService.filter('updated_at', this.userId, this.groupId, this.decksOrderUpdatedAtDesc);
+            this.decksOrderUpdatedAtDesc = !this.decksOrderUpdatedAtDesc;
+            this.decksOrderNameDesc = false;
+            this.decksOrderCreatedAtDesc = false;
+          } catch (e) {
+            console.error(e);
+          }
         }
-      },{
+      }, {
         text: 'Ordem Alfabética',
         handler: () => {
-          // try {
-          //   this.groups = this.groupService.filter('name', this.userId, this.groupsOrderNameDesc);
-          //   this.groupsOrderNameDesc = !this.groupsOrderNameDesc;
-          //   this.groupsOrderCreatedAtDesc = false;
-          //   this.groupsOrderUpdatedAtDesc = false;
-          // } catch(e){
-          //   console.error(e);
-          // }
+          try {
+            this.decks = this.decksService.filter('name', this.userId, this.groupId, this.decksOrderNameDesc);
+            this.decksOrderNameDesc = !this.decksOrderNameDesc;
+            this.decksOrderCreatedAtDesc = false;
+            this.decksOrderUpdatedAtDesc = false;
+          } catch (e) {
+            console.error(e);
+          }
         }
       }, {
         text: 'Data de Criação',
         handler: () => {
-          // try {
-          //   this.groups = this.groupService.filter('created_at',this.userId, this.groupsOrderCreatedAtDesc);
-          //   this.groupsOrderCreatedAtDesc = !this.groupsOrderCreatedAtDesc;
-          //   this.groupsOrderNameDesc = false;
-          //   this.groupsOrderUpdatedAtDesc = false;
-          // } catch(e){
-          //   console.error(e);
-          // }
+          try {
+            this.decks = this.decksService.filter('created_at', this.userId, this.groupId, this.decksOrderCreatedAtDesc);
+            this.decksOrderCreatedAtDesc = !this.decksOrderCreatedAtDesc;
+            this.decksOrderNameDesc = false;
+            this.decksOrderUpdatedAtDesc = false;
+          } catch (e) {
+            console.error(e);
+          }
         }
-      },{
+      }, {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',
-        handler: () => {}
+        handler: () => { }
       }]
     });
     await actionSheet.present();
@@ -151,15 +151,15 @@ export class DecksPage implements OnInit {
     const modal = await this.modalController.create({
       component: ArchivedPage,
       cssClass: 'my-custom-class',
-      componentProps: {userId: this.userId, groupId: this.groupId}
+      componentProps: { userId: this.userId, groupId: this.groupId }
     });
     return await modal.present();
   }
 
-  async showList(ev: Event, data: Deck){
+  async showList(ev: Event, data: Deck) {
     const popover = await this.popoverController.create({
       component: ListPopoverComponent,
-      componentProps: {deck: data, userId: this.userId, groupId: this.groupId},
+      componentProps: { deck: data, userId: this.userId, groupId: this.groupId },
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true
