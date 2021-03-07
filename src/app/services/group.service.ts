@@ -10,6 +10,13 @@ export class GroupService {
 
   constructor(private afs: AngularFirestore) { }
 
+  getGroupOnce(userId: string, groupId: string){
+    return this.afs
+    .collection('users').doc(userId)
+    .collection('group').doc(groupId)
+    .get();
+  }
+
   getGroups(id: string, archived: boolean = false) {
     return this.afs
       .collection('users').doc(id)

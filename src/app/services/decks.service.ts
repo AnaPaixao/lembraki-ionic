@@ -29,9 +29,11 @@ export class DecksService {
 
   addDeck(userId: string, groupId: string, data: Deck) {
 
+    console.log(data);
+
     return this.afs.collection('users').doc(userId).collection('group').doc(groupId).collection('decks').add({
       name: data.name,
-      color: '#ae2121',
+      color: data.color,
       direction: '',
       in_progress: false,
       progress: 0,

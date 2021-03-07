@@ -1,3 +1,5 @@
+import { Group } from './../../classes/group';
+import { GroupService } from './../../services/group.service';
 import { ArchivedPage } from './archived/archived.page';
 import { AlertController, ActionSheetController, PopoverController, ModalController } from '@ionic/angular';
 import { Deck } from './../../classes/deck';
@@ -18,6 +20,7 @@ export class DecksPage implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private decksService: DecksService,
+    private groupService: GroupService,
     private alertController: AlertController,
     private actionSheetController: ActionSheetController,
     public popoverController: PopoverController,
@@ -27,6 +30,7 @@ export class DecksPage implements OnInit {
   userId: string;
   groupId: string;
   groupName: string;
+  groupColor: string;
 
   decks: Observable<Deck[]>;
 
@@ -38,11 +42,16 @@ export class DecksPage implements OnInit {
 
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
-    this.groupName = this.route.snapshot.paramMap.get('groupName');
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
       this.decks = this.decksService.getDecks(res.uid, this.groupId);
+
+      this.groupService.getGroupOnce(res.uid, this.groupId).subscribe(e=>{
+        console.log(e.data())
+        this.groupName = e.data().name;
+        this.groupColor = e.data().color;
+      })
     });
   }
 
@@ -74,6 +83,7 @@ export class DecksPage implements OnInit {
           text: 'Ok',
           handler: (data) => {
             try {
+              data.color = this.groupColor;
               this.decksService.addDeck(this.userId, this.groupId, <Deck>data);
             } catch (e) {
               console.error(e);
