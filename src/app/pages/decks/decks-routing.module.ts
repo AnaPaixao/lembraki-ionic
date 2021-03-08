@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'archived',
     loadChildren: () => import('./archived/archived.module').then( m => m.ArchivedPageModule)
+  },
+  {
+    path: 'edit-modal',
+    loadChildren: () => import('./edit-modal/edit-modal.module').then( m => m.EditModalPageModule)
   }
 
 ];

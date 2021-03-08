@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar</ion-title>
+    <ion-icon (click)="closeModal()" slot="end" name="close" class="ion-padding-end" style="font-size: 1.5rem;"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines=none>
+    <ion-item>
+      <ion-label position="floating">Nome do Deck</ion-label>
+      <ion-input [(ngModel)]="deck.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cor do Deck</ion-label>
+      <input #color type="color" clickStopPropagation
+      [(ngModel)]="deck.color" />
+    </ion-item>
+  </ion-list>
+
+  <h4>Progresso atual <span style="display: inline-block; position: absolute; right: 20px;">({{deck.progress}}%)</span></h4>
+  <ion-progress-bar [value]="deck.progress / 100"></ion-progress-bar>
+  <ion-button class="ion-margin" expand="block" color="tertiary" (click)="alertConfirmDelete()">Zerar progresso</ion-button>
+</ion-content>
+
+<ion-footer class="toolbar">
+  <ion-button color="success" expand="block" class="ion-margin" (click)="updateDeck()">Confirmar</ion-button>
+</ion-footer>

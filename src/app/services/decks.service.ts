@@ -102,4 +102,14 @@ export class DecksService {
       .valueChanges({ idField: 'id' });
   }
 
+  updateColor(userId: string, groupId: string, deckId: string, color: string) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').doc(deckId)
+      .update({
+        color: color
+      })
+  }
+
 }

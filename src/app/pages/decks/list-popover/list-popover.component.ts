@@ -1,8 +1,10 @@
 import { Deck } from './../../../classes/deck';
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, ModalController } from '@ionic/angular';
 import { DecksService } from 'src/app/services/decks.service';
 import { ToastService } from 'src/app/services/toast.service';
+
+import {EditModalPage} from '../edit-modal/edit-modal.page';
 
 @Component({
   selector: 'app-list-popover',
@@ -20,14 +22,11 @@ export class ListPopoverComponent implements OnInit {
     private alertController: AlertController,
     private popover: PopoverController,
     private decksService: DecksService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {}
-
-  edit(){
-    this.popover.dismiss();
-  }
 
   delete(){
     this.alertConfirmDelete();
@@ -94,4 +93,17 @@ export class ListPopoverComponent implements OnInit {
     await alert.present();
   }
 
+  async editModal() {
+    this.popover.dismiss();
+    const modal = await this.modalController.create({
+      component: EditModalPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'deck': this.deck,
+        'userId': this.userId,
+        'groupId': this.groupId
+      }
+    });
+    return await modal.present();
+  }
 }
