@@ -19,11 +19,11 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let deck of decks | async">
-        <ion-card color="primary" [style.background-color]="deck.color">
+        <ion-card color="primary" [style.background-color]="deck.color" [routerLink]="['/cards', groupId, deck.id]">
 
           <ion-card-header>
 
-            <ion-card-title>
+            <ion-card-title class="ion-padding-end">
               {{ deck.name }}
             </ion-card-title>
 
@@ -39,7 +39,7 @@
           </ion-card-header>
 
           <ion-card-content>
-            Awesome content
+            <ion-progress-bar [value]="deck.progress / 100"></ion-progress-bar>
           </ion-card-content>
 
         </ion-card>
