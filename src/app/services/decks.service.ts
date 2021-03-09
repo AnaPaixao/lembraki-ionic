@@ -12,6 +12,14 @@ export class DecksService {
     private afs: AngularFirestore
   ) { }
 
+  getDeckOnce(userId: string, groupId: string, deckId: string) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection<Deck>('decks').doc(deckId)
+      .get()
+  }
+
   getDeck(userId: string, groupId: string, deckId: string) {
     return this.afs
       .collection('users').doc(userId)
