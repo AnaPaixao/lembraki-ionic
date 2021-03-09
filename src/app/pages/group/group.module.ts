@@ -1,5 +1,5 @@
-import { ListComponent } from './list/list.component';
 import { ClickStopPropagationDirective } from './../../directives/global/click-stop-propagation.directive';
+import { ListComponent } from './list/list.component';
 import { GroupPage } from './group.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     GroupPageRoutingModule,
     FontAwesomeModule
   ],
-  declarations: [GroupPage, ClickStopPropagationDirective, ListComponent]
+  declarations: [GroupPage, ListComponent, ClickStopPropagationDirective]
 })
 export class GroupPageModule {
   constructor(library: FaIconLibrary) {

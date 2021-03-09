@@ -4,12 +4,15 @@ ion-content {
   ion-card {
     margin: 0;
     box-shadow: 3px 3px 0 #000;
+    outline: none;
+  }
 
-    .dots{
-      position: absolute;
-      right: 12px;
-      top: 14px;
-    }
+  .dots{
+    z-index: 100000;
+    position: absolute;
+    right: 12px;
+    top: 14px;
+    color: #000;
   }
 }
 

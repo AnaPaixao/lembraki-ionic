@@ -1,3 +1,4 @@
+import { ListPopoverComponent } from './list-popover/list-popover.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +12,8 @@ import { DecksPage } from './decks.page';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +22,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     DecksPageRoutingModule,
     FontAwesomeModule
   ],
-  declarations: [DecksPage]
+  declarations: [DecksPage, ListPopoverComponent]
 })
 export class DecksPageModule {
   constructor(library: FaIconLibrary) {
