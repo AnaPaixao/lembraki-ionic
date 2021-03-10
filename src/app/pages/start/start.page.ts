@@ -11,5 +11,10 @@ export class StartPage implements OnInit {
 
   ngOnInit() {
   }
+Remember(){
 
+}
+NoRemember(){
+
+}
 }

@@ -8,6 +8,28 @@
 </ion-header>
 
 <ion-content>
+<div class="content">
+  <div class="card">
+    <div class="card-inner">
+        <div class="card-front"> bacon </div>
+        <div class="card-back"> farofa </div>
+    </div>
+  </div>
+  <div class="buttons ion-margin-bottom">
+  <ion-button (click)="Remember()" color="success">
+    Lembro
+  </ion-button>
+
+  <ion-button (click)="NoRemember()" color="danger">
+    Não lembro
+  </ion-button>
+  </div>
+</div>
+
+<div class="progress-bar ion-margin-top">
+  <p class="ion-text-center">3/30</p>
+  <ion-progress-bar value="0.5"></ion-progress-bar>
+</div>
 
 </ion-content>
 
