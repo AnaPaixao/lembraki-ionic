@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CardsService } from 'src/app/services/cards.service';
 import { Card } from 'src/app/classes/card';
@@ -9,12 +9,15 @@ import { Card } from 'src/app/classes/card';
   templateUrl: './edit-modal.page.html',
   styleUrls: ['./edit-modal.page.scss'],
 })
-export class EditModalPage implements OnInit {
+export class EditModalPage implements OnInit, OnDestroy {
 
   @Input('userId') userId: string;
   @Input('groupId') groupId: string;
   @Input('deckId') deckId: string;
   @Input('card') card: Card;
+
+  private front: string;
+  private back: string;
 
   constructor(
     private modalController: ModalController,
@@ -23,11 +26,19 @@ export class EditModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.front = this.card.front;
+    this.back = this.card.back;
+  }
+
+  ngOnDestroy() {
+    this.card.front = this.front;
+    this.card.back = this.back;
   }
 
   closeModal(){
     this.modalController.dismiss();
   }
+
 
   updateCard(){
     try {

@@ -1,5 +1,5 @@
 import { ModalController, AlertController } from '@ionic/angular';
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Deck } from 'src/app/classes/deck';
 import { DecksService } from 'src/app/services/decks.service';
 
@@ -9,11 +9,14 @@ import { DecksService } from 'src/app/services/decks.service';
   templateUrl: './edit-modal.page.html',
   styleUrls: ['./edit-modal.page.scss'],
 })
-export class EditModalPage implements OnInit {
+export class EditModalPage implements OnInit, OnDestroy {
 
   @Input('deck') deck: Deck;
   @Input('userId') userId: string;
   @Input('groupId') groupId: string;
+
+  private deckName: string;
+  private deckColor: string;
 
   constructor(
      private decksService: DecksService,
@@ -22,6 +25,13 @@ export class EditModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.deckName = this.deck.name;
+    this.deckColor = this.deck.color;
+  }
+
+  ngOnDestroy(){
+    this.deck.name = this.deckName;
+    this.deck.color = this.deckColor;
   }
 
   changeColor(){
@@ -58,7 +68,7 @@ export class EditModalPage implements OnInit {
         {
           text: 'Ok',
           handler: () => {
-      
+
           },
         },
       ],
