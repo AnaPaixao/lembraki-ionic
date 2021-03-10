@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { DecksService } from 'src/app/services/decks.service';
 import { Observable } from 'rxjs';
 import { CardsService } from './../../services/cards.service';
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Card } from 'src/app/classes/card';
+import {EditModalPage} from './edit-modal/edit-modal.page';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class CardsPage implements OnInit {
     private auth: AuthService,
     private cardsService: CardsService,
     private decksService: DecksService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -52,7 +54,7 @@ export class CardsPage implements OnInit {
 
   async presentCardsAlertInput() {
     const alert = await this.alertController.create({
-      cssClass: 'alertGroup',
+      cssClass: 'my-custom-cssClass',
       header: 'Criar Nova Carta',
       inputs: [
         {
@@ -90,6 +92,20 @@ export class CardsPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async editModal(card: Card) {
+    const modal = await this.modalController.create({
+      component: EditModalPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        userId: this.userId,
+        groupId: this.groupId,
+        deckId: this.deckId,
+        card: card,
+      }
+    });
+    return await modal.present();
   }
 
 

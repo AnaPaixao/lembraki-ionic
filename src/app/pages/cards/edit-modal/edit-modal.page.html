@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title> Editar </ion-title>
+    <ion-icon (click)="closeModal()" slot="end" name="close" class="ion-padding-end" style="font-size: 1.5rem;"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Termo</ion-label>
+      <ion-input type="text" [(ngModel)]="card.front"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Definição</ion-label>
+      <ion-textarea [(ngModel)]="card.back"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-button class="ion-margin" expand="block" color="tertiary" (click)="deleteCard()"><ion-icon slot="start" name="trash"></ion-icon> Deletar</ion-button>
+
+</ion-content>
+
+<ion-footer class="toolbar">
+  <ion-button color="success" expand="block" class="ion-margin" (click)="updateCard()">Salvar</ion-button>
+</ion-footer>

@@ -15,7 +15,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let card of cards | async">
-        <ion-card [style.background-color]="'rgb(255, 255, 153)'" class="ion-no-margin">
+        <ion-card [style.background-color]="'rgb(255, 255, 153)'" class="ion-no-margin" (click)="editModal(card)">
 
           <ion-card-header>
 
