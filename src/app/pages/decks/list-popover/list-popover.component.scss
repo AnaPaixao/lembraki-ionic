@@ -1,0 +1,10 @@
+ion-list {
+  padding: 0px;
+  ion-item {
+    border-bottom: solid 1px rgba(63, 63, 63, 0.3);
+  }
+
+  ion-item:last-child{
+    border: none;
+  }
+}
