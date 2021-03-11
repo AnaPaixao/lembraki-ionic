@@ -1,34 +1,42 @@
 <ion-header>
   <ion-toolbar color="primary">
   <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
+    <ion-back-button></ion-back-button>
   </ion-buttons>
     <ion-title>Start</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<div class="content">
-  <div class="card">
-    <div class="card-inner">
-        <div class="card-front"> bacon </div>
-        <div class="card-back"> farofa </div>
+<div *ngFor="let card of cards | async; let i = index">
+  <div class="content" *ngIf="i == index">
+    <div class="card" attr.bacon="{{i}}">
+      <div class="card-inner">
+          <div class="card-front"> {{i}} {{card.front}} </div>
+          <div class="card-back"> {{card.back}} </div>
+      </div>
     </div>
-  </div>
-  <div class="buttons ion-margin-bottom">
-  <ion-button (click)="Remember()" color="success">
-    Lembro
-  </ion-button>
+    <div class="buttons ion-margin-bottom">
+    <ion-button (click)="Remember()" color="success">
+      Lembro
+    </ion-button>
 
-  <ion-button (click)="NoRemember()" color="danger">
-    Não lembro
-  </ion-button>
+    <ion-button (click)="NoRemember()" color="danger">
+      Não lembro
+    </ion-button>
+    </div>
   </div>
 </div>
 
-<div class="progress-bar ion-margin-top">
-  <p class="ion-text-center">3/30</p>
-  <ion-progress-bar value="0.5"></ion-progress-bar>
+<div *ngIf="deckLength && deckLength > index" class="progress-bar ion-margin-top">
+ <p></p>
+ <p></p>
+  <p class="ion-text-center">{{index}}/{{deckLength}}</p>
+  <ion-progress-bar value="{{index/deckLength}}"></ion-progress-bar>
+</div>
+
+<div *ngIf="!(deckLength && deckLength > index)">
+  Acabou, mano.
 </div>
 
 </ion-content>
