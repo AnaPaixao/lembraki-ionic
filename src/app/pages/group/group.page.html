@@ -14,7 +14,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-margin-bottom">
-  <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]"
+   <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]"
     class="ion-margin-top group" [style.backgroundColor]="color.value">
     <input #color (focusout)="changeColor(group.id, group.color)" type="color" clickStopPropagation
       [(ngModel)]="group.color" />
@@ -26,7 +26,7 @@
 
   <ion-footer>
     <div class="toolbar">
-      <ion-button (click)="addGroup()" mode="md" color="success" shape="round">
+      <ion-button (click)="addGroup()" mode="md" color="tertiary" shape="round">
         <ion-icon slot="start" slot="icon-only" style="font-size: 1em" name="add"></ion-icon>
       </ion-button>
     </div>

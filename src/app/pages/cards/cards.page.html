@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-button expand="block" [routerLink]="['/start', groupId, deckId]" class="ion-margin" size="large" color="success">
+  <ion-button [disabled]="!disableStart" shape="round" expand="block" color="success" [routerLink]="['/start', groupId, deckId]" class="ion-margin" size="large">
     Iniciar
   </ion-button>
 
@@ -40,7 +40,7 @@
 
   <ion-footer>
     <div class="toolbar">
-      <ion-button mode="md" color="success" shape="round" (click)="addCard()">
+      <ion-button mode="md" color="tertiary" shape="round" (click)="addCard()">
         <ion-icon slot="start" slot="icon-only" style="font-size: 1em" name="add"></ion-icon>
       </ion-button>
     </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CardsService } from 'src/app/services/cards.service';
 import { Card } from 'src/app/classes/card';
-
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-edit-modal',
@@ -68,7 +68,7 @@ export class EditModalPage implements OnInit, OnDestroy {
           handler: () => {
             try {
               this.cardsService.deleteCard(this.userId, this.groupId, this.deckId, this.card.id);
-              this.modalController.dismiss();
+              this.modalController.dismiss('deleted');
             } catch (e) {
               console.error(e)
             }
