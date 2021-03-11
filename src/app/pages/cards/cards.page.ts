@@ -44,7 +44,7 @@ export class CardsPage implements OnInit {
       );
 
       this.cards.subscribe((res) => {
-        console.log(res);
+        // console.log(res);
         if (res[0]) {
           this.disableStart = true;
         }
@@ -53,7 +53,7 @@ export class CardsPage implements OnInit {
       this.decksService
         .getDeckOnce(res.uid, this.groupId, this.deckId)
         .subscribe((e) => {
-          console.log(e.data());
+          // console.log(e.data());
           this.deckName = e.data().name;
           this.deckColor = e.data().color;
         });
@@ -111,10 +111,6 @@ export class CardsPage implements OnInit {
     await alert.present();
   }
 
-  notify(){
-    console.log("Google");
-  }
-
   async editModal(card: Card) {
     const modal = await this.modalController.create({
       component: EditModalPage,
@@ -132,7 +128,7 @@ export class CardsPage implements OnInit {
         this.cards.subscribe((res) => {
           if (!res[0]) {
             this.disableStart = false;
-            console.log(this.disableStart);
+            // console.log(this.disableStart);
           }
         });
       }
