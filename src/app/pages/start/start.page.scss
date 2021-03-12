@@ -4,7 +4,6 @@
   flex-direction: column;
   justify-content: center;
   align-items:center;
-
 }
 
 .card {
@@ -40,17 +39,36 @@
 }
 
 .card-front {
-  background-color: #bbb;
+  background-color: rgb(255, 255, 153);
   color: black;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  .text {
+    font-size: 2rem;
+    padding: 5px 5px;
+   // text-shadow: 2px 2px 2px rgb(0, 0, 0,0.4);
+  }
 }
 
 .card-back {
-  background-color: #2980b9;
-  color: white;
+  background-color: var(--ion-color-tertiary);
+  color: #fff;
   transform: rotateY(180deg);
+  margin-left: 10px;
+  overflow-y:scroll;
+  padding: 5px;
+
+  .text{
+ // text-shadow: 2px 2px 2px rgb(0, 0, 0,0.4);
+    font-size: 1.2rem;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 10px;
+
+  }
 }
-
-
 
 ion-button {
   width: 130px;
@@ -62,9 +80,6 @@ ion-button {
   justify-content: space-between;
   max-width: 320px;
   width: 80%;
-
-
-
 }
 
 .progress-bar {
@@ -82,4 +97,14 @@ ion-progress-bar {
   width: 80%;
   max-width: 320px;
   box-shadow: 3px 2px 3px rgba(0, 0, 0, 0.25)
+}
+
+
+
+/* GENERAL */
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

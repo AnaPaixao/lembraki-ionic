@@ -10,10 +10,14 @@
 <ion-content>
 <div *ngFor="let card of cards | async; let i = index">
   <div class="content" *ngIf="i == index">
-    <div class="card" attr.bacon="{{i}}">
+    <div class="card">
       <div class="card-inner">
-          <div class="card-front"> {{i}} {{card.front}} </div>
-          <div class="card-back"> {{card.back}} </div>
+          <div class="card-front">
+            <div class="text">{{card.front}}</div>
+          </div>
+          <div class="card-back" #cardBackContent>
+            <div #backInner class="text">{{card.back}}</div>
+          </div>
       </div>
     </div>
     <div class="buttons ion-margin-bottom">
@@ -26,7 +30,9 @@
     </ion-button>
     </div>
   </div>
+  <p></p>
 </div>
+
 
 <div *ngIf="deckLength && deckLength > index" class="progress-bar ion-margin-top">
  <p></p>
