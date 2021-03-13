@@ -10,8 +10,8 @@
 <ion-content>
 <div *ngFor="let card of cards | async; let i = index">
   <div class="content" *ngIf="i == index">
-    <div class="card">
-      <div class="card-inner">
+    <div class="card" (click)="flipCard()">
+      <div class="card-inner" #cardInner>
           <div class="card-front">
             <div class="text">{{card.front}}</div>
           </div>
@@ -21,28 +21,49 @@
       </div>
     </div>
     <div class="buttons ion-margin-bottom">
-    <ion-button (click)="Remember()" color="success">
+    <ion-button (click)="Remember(card)" color="success">
       Lembro
     </ion-button>
 
-    <ion-button (click)="NoRemember()" color="danger">
+    <ion-button (click)="NoRemember(card)" color="danger">
       Não lembro
     </ion-button>
     </div>
   </div>
-  <p></p>
 </div>
 
 
 <div *ngIf="deckLength && deckLength > index" class="progress-bar ion-margin-top">
- <p></p>
- <p></p>
   <p class="ion-text-center">{{index}}/{{deckLength}}</p>
   <ion-progress-bar value="{{index/deckLength}}"></ion-progress-bar>
 </div>
 
-<div *ngIf="!(deckLength && deckLength > index)">
-  Acabou, mano.
+<!-- Result -->
+
+<div *ngIf="!(deckLength && deckLength > index)" class="result">
+
+  <h1 class="ubuntu ion-margin-bottom">Resumo</h1>
+
+  <div class="content-result">
+    <div class="right">
+      <p>{{ rightCards.length }}</p>
+      <ion-icon style="font-size: 1.6rem;" name="checkmark-outline"></ion-icon>
+    </div>
+    <div class="wrong">
+      <p>{{ wrongCards.length}}</p>
+      <ion-icon style="font-size: 1.6rem;" name="close-outline"></ion-icon>
+    </div>
+  </div>
+
+  <h1 *ngIf="wrongCards[0]" class="ubuntu">Cartas erradas:</h1>
+  <div *ngIf="!wrongCards[0]" style="text-align: center;" class="ubuntu">
+    <h2 class="ubuntu">Você acertou TUDO!</h2>
+    <h2 class="ubuntu">Continue assim, Parabéns!!</h2>
+  </div>
+
+  <div *ngIf="wrongCards[0]" class="content-wrong-cards">
+    <div *ngFor="let card of wrongCards" class="card-wrong">{{card.front}}</div>
+  </div>
 </div>
 
 </ion-content>

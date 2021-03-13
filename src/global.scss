@@ -34,6 +34,10 @@ h2 {
   font-family: "Lobster Two", cursive;
 }
 
+.ubuntu {
+  font-family: "Ubuntu", sans-serif !important;
+}
+
 .logo {
   font-family: "Lobster", cursive !important;
 }
@@ -43,7 +47,6 @@ h2 {
 .default-toast {
   transform: translateY(-10vh) !important;
 }
-
 
 .alertGroup {
   h2 {
@@ -88,6 +91,3 @@ h2 {
     font-weight: bold;
   }
 }
-
-
-

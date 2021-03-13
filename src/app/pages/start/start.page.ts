@@ -24,9 +24,15 @@ export class StartPage implements OnInit {
 
   index: number = 0;
 
-
   @ViewChild('cardBackContent') cardBackContent: ElementRef;
   @ViewChild('backInner') cardBackInner: ElementRef;
+
+  @ViewChild('cardInner') cardInner: ElementRef;
+
+
+  // Result
+  wrongCards: Card[] = [];
+  rightCards: Card[] = [];
 
   constructor(
     private auth: AuthService,
@@ -61,39 +67,46 @@ export class StartPage implements OnInit {
         });
         this.deckLength = this.cardsArray.length;
       });
-
     });
   }
 
-  ngDoCheck(){
+  ngDoCheck() {}
 
-  }
-
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     // if(this.cardBackContent){
     //   console.log(this.cardBackContent.nativeElement);
     // }
 
-    if(this.cardBackInner && this.cardBackContent){
+    if (this.cardBackInner && this.cardBackContent) {
       console.log(this.cardBackInner.nativeElement.textContent.length);
 
-      if(this.cardBackInner.nativeElement.textContent.length < 200){
-        this.cardBackContent.nativeElement.classList.add("flex-center")
+      if (this.cardBackInner.nativeElement.textContent.length < 210) {
+        this.cardBackContent.nativeElement.classList.add('flex-center');
       } else {
-        this.cardBackContent.nativeElement.classList.remove("flex-center")
+        this.cardBackContent.nativeElement.classList.remove('flex-center');
       }
     }
   }
 
-  Remember() {
+  Remember(card: Card) {
+    this.rightCards.push(card);
     this.incrementIndex();
   }
-  NoRemember() {
+  NoRemember(card: Card) {
+    this.wrongCards.push(card);
     this.incrementIndex();
   }
 
   incrementIndex() {
     this.index++;
     console.log(this.index);
+  }
+
+  flipCard() {
+    if (this.cardInner.nativeElement.style.transform == 'rotateY(180deg)') {
+      this.cardInner.nativeElement.style.transform = 'rotateY(0deg)';
+    } else {
+      this.cardInner.nativeElement.style.transform = 'rotateY(180deg)';
+    }
   }
 }
