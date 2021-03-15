@@ -4,6 +4,10 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{deckName}}</ion-title>
+    <ion-button *ngIf="false" color="tertiary" slot="end" class="ion-margin-end">
+      Reset
+      <ion-icon slot="start" name="refresh"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

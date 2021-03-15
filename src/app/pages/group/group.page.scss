@@ -45,8 +45,11 @@ ion-content {
 
   .dots{
     position: absolute;
-    right: 12px;
-    top: 14px;
+    right: 2px;
+    top: 2px;
+    padding: 8px;
+    font-size: 1.3rem;
+    color: #FFF;
   }
 
   .group-options {

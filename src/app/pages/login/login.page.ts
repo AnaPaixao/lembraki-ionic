@@ -33,13 +33,35 @@ export class LoginPage implements OnInit {
 
     try {
       await this.authService.login(this.userLogin);
+      this.router.navigate(['/group']);
+
     } catch (error) {
-      this.presentToast(error.message);
+      let message: string;
+      console.log(error)
+
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = 'O E-mail já está sendo usado!';
+          break;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido.';
+          break;
+        case 'auth/user-not-found':
+        case 'auth/wrong-password':
+          message = 'Usuário e/ou senha inválido.';
+          break;
+         case 'auth/argument-error':
+          message = 'É necessário informar e-mail e senha.';
+          break;
+      }
+
+      this.presentToast(message);
+
     } finally {
       this.loading.dismiss();
     }
 
-    this.router.navigate(['/group']);
+
   }
 
   async presentLoading() {
@@ -51,7 +73,9 @@ export class LoginPage implements OnInit {
 
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({
-      message, duration: 2000});
+      cssClass: 'toast-center',
+      message,
+      duration: 2000});
     toast.present();
   }
 

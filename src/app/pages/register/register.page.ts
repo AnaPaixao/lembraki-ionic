@@ -41,16 +41,24 @@ export class RegisterPage implements OnInit {
 
     try {
       await this.authService.register(this.userRegister);
+      this.router.navigate(['/group']);
 
     } catch (error){
       let message: string;
+      console.log(error)
 
       switch (error.code) {
         case 'auth/email-already-in-use':
           message = 'O E-mail já está sendo usado!';
           break;
         case 'auth/invalid-email':
-          message = 'E-mail inválido';
+          message = 'E-mail inválido.';
+          break;
+        case 'auth/weak-password':
+          message = 'A senha deve ter pelo menos 6 caracteres.';
+          break;
+          case 'auth/argument-error':
+            message = 'É necessário informar e-mail e senha.';
           break;
       }
 
@@ -59,7 +67,6 @@ export class RegisterPage implements OnInit {
       this.loading.dismiss();
     }
 
-    this.router.navigate(['/group']);
   }
 
   async presentLoading() {
@@ -71,7 +78,10 @@ export class RegisterPage implements OnInit {
 
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({
-      message, duration: 2000});
+      mode: 'md',
+      cssClass: 'toast-center',
+      message,
+      duration: 3000});
     toast.present();
   }
 
