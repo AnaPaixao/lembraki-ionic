@@ -15,6 +15,8 @@ export class StartPage implements OnInit {
   groupId: string;
   deckId: string;
   userId: string;
+  way: string;
+
   cards: Observable<Card[]>;
   deckName: string;
   deckColor: string;
@@ -44,6 +46,7 @@ export class StartPage implements OnInit {
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
     this.deckId = this.route.snapshot.paramMap.get('deckId');
+    this.way = this.route.snapshot.paramMap.get('way');
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
@@ -86,6 +89,7 @@ export class StartPage implements OnInit {
         this.cardBackContent.nativeElement.classList.remove('flex-center');
       }
     }
+
   }
 
   Remember(card: Card) {

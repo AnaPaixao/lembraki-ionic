@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-button [disabled]="!disableStart" shape="round" expand="block" color="success" [routerLink]="['/start', groupId, deckId]" class="ion-margin" size="large">
+  <ion-button [disabled]="!disableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
     Iniciar
   </ion-button>
 

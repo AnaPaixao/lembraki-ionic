@@ -2,13 +2,13 @@ import { ToastService } from './../../services/toast.service';
 import {
   AlertController,
   ModalController,
-  ToastController,
+  NavController,
 } from '@ionic/angular';
 import { DecksService } from 'src/app/services/decks.service';
 import { Observable } from 'rxjs';
 import { CardsService } from './../../services/cards.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Card } from 'src/app/classes/card';
 import { EditModalPage } from './edit-modal/edit-modal.page';
@@ -34,7 +34,8 @@ export class CardsPage implements OnInit {
     private decksService: DecksService,
     private alertController: AlertController,
     private modalController: ModalController,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -99,7 +100,7 @@ export class CardsPage implements OnInit {
           text: 'Ok',
           handler: (data) => {
             if (data.front == "" || data.back == "") {
-              this.toastService.presentToast("É necessário informar o termo e a definição!", 1000000)
+              this.toastService.presentToast("É necessário informar o termo e a definição!", 3000)
             } else {
               try {
                 data.color = this.deckColor;
@@ -146,5 +147,46 @@ export class CardsPage implements OnInit {
 
     return await modal.present();
   }
+
+  async presentAlertRadio() {
+    const alert = await this.alertController.create({
+      cssClass: 'title-ubuntu',
+      header: 'Escolha:',
+      subHeader: 'Deseja jogar pelo termo ou a definição?',
+      inputs: [
+        {
+          name: 'term',
+          type: 'radio',
+          label: 'Termo',
+          value: 'term',
+          checked: true
+        },
+        {
+          name: 'definition',
+          type: 'radio',
+          label: 'Definição',
+          value: 'definition'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            this.router.navigate(['/start', this.groupId, this.deckId, data]);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 
 }
