@@ -118,12 +118,19 @@ export class ListComponent implements OnInit, AfterContentInit {
         }, {
           text: 'Ok',
           handler: (data) => {
-            try{
-              this.groupService.renameGroup(this.userId, this.group.id, data.name);
-              this.toastService.presentToast(`Conjunto renomeado!`);
-            } catch(e){
-              console.error(e);
+
+            if(data.name == ""){
+              this.toastService.presentToast("O conjunto precisa ter um nome!")
+            } else {
+              try{
+                this.groupService.renameGroup(this.userId, this.group.id, data.name);
+                this.toastService.presentToast(`Conjunto renomeado!`);
+              } catch(e){
+                console.error(e);
+              }
+
             }
+
 
           }
         }

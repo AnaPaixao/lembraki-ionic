@@ -1,4 +1,9 @@
-import { AlertController, ModalController } from '@ionic/angular';
+import { ToastService } from './../../services/toast.service';
+import {
+  AlertController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
 import { DecksService } from 'src/app/services/decks.service';
 import { Observable } from 'rxjs';
 import { CardsService } from './../../services/cards.service';
@@ -28,7 +33,8 @@ export class CardsPage implements OnInit {
     private cardsService: CardsService,
     private decksService: DecksService,
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -92,16 +98,20 @@ export class CardsPage implements OnInit {
         {
           text: 'Ok',
           handler: (data) => {
-            try {
-              data.color = this.deckColor;
-              this.cardsService.addCard(
-                this.userId,
-                this.groupId,
-                this.deckId,
-                <Card>data
-              );
-            } catch (e) {
-              console.error(e);
+            if (data.front == "" || data.back == "") {
+              this.toastService.presentToast("É necessário informar o termo e a definição!", 1000000)
+            } else {
+              try {
+                data.color = this.deckColor;
+                this.cardsService.addCard(
+                  this.userId,
+                  this.groupId,
+                  this.deckId,
+                  <Card>data
+                );
+              } catch (e) {
+                console.error(e);
+              }
             }
           },
         },
@@ -123,8 +133,8 @@ export class CardsPage implements OnInit {
       },
     });
 
-    modal.onDidDismiss().then((data)=> {
-      if(data.data == "deleted"){
+    modal.onDidDismiss().then((data) => {
+      if (data.data == 'deleted') {
         this.cards.subscribe((res) => {
           if (!res[0]) {
             this.disableStart = false;
@@ -132,8 +142,9 @@ export class CardsPage implements OnInit {
           }
         });
       }
-    })
+    });
 
     return await modal.present();
   }
+
 }

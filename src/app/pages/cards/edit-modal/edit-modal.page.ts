@@ -1,3 +1,4 @@
+import { ToastService } from './../../../services/toast.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CardsService } from 'src/app/services/cards.service';
@@ -22,7 +23,8 @@ export class EditModalPage implements OnInit, OnDestroy {
   constructor(
     private modalController: ModalController,
     private cardsService: CardsService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -41,12 +43,20 @@ export class EditModalPage implements OnInit, OnDestroy {
 
 
   updateCard(){
-    try {
-      this.cardsService.updateCard(this.userId, this.groupId, this.deckId, this.card.id, this.card)
-      this.modalController.dismiss();
-    } catch (e) {
-      console.error(e);
+
+    if(this.card.front == "" || this.card.back == "" ){
+
+      this.toastService.presentToast("A carta deve ter um termo e uma definição!");
+
+    }else{
+      try {
+        this.cardsService.updateCard(this.userId, this.groupId, this.deckId, this.card.id, this.card)
+        this.modalController.dismiss();
+      } catch (e) {
+        console.error(e);
+      }
     }
+
   }
 
   deleteCard(){

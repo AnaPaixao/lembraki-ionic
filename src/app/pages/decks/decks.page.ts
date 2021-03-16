@@ -1,7 +1,12 @@
 import { Group } from './../../classes/group';
 import { GroupService } from './../../services/group.service';
 import { ArchivedPage } from './archived/archived.page';
-import { AlertController, ActionSheetController, PopoverController, ModalController } from '@ionic/angular';
+import {
+  AlertController,
+  ActionSheetController,
+  PopoverController,
+  ModalController,
+} from '@ionic/angular';
 import { Deck } from './../../classes/deck';
 import { DecksService } from './../../services/decks.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListPopoverComponent } from './list-popover/list-popover.component';
-
+import { ToastService } from '../../services/toast.service';
 
 
 @Component({
@@ -18,6 +23,8 @@ import { ListPopoverComponent } from './list-popover/list-popover.component';
   styleUrls: ['./decks.page.scss'],
 })
 export class DecksPage implements OnInit {
+
+
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
@@ -26,8 +33,9 @@ export class DecksPage implements OnInit {
     private alertController: AlertController,
     private actionSheetController: ActionSheetController,
     public popoverController: PopoverController,
-    public modalController: ModalController
-  ) { }
+    public modalController: ModalController,
+    private toastService: ToastService
+  ) {}
 
   userId: string;
   groupId: string;
@@ -35,7 +43,6 @@ export class DecksPage implements OnInit {
   groupColor: string;
 
   decks: Observable<Deck[]>;
-
 
   //Filter
   decksOrderNameDesc: boolean = false;
@@ -45,17 +52,18 @@ export class DecksPage implements OnInit {
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
 
-    this.auth.getAuth().authState.subscribe((res) => {
+      this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
       this.decks = this.decksService.getDecks(res.uid, this.groupId);
 
-      this.groupService.getGroupOnce(res.uid, this.groupId).subscribe(e => {
-        console.log(e.data())
+       this.groupService.getGroupOnce(res.uid, this.groupId).subscribe((e) => {
+        console.log(e.data());
         this.groupName = e.data().name;
         this.groupColor = e.data().color;
-      })
+      });
     });
   }
+
 
   addDeck() {
     this.presentDecksAlertInput();
@@ -84,11 +92,19 @@ export class DecksPage implements OnInit {
         {
           text: 'Ok',
           handler: (data) => {
-            try {
-              data.color = this.groupColor;
-              this.decksService.addDeck(this.userId, this.groupId, <Deck>data);
-            } catch (e) {
-              // console.error(e);
+            if (data.name == "") {
+              this.toastService.presentToast('Não é possível criar um deck sem nome!');
+            } else {
+              try {
+                data.color = this.groupColor;
+                this.decksService.addDeck(
+                  this.userId,
+                  this.groupId,
+                  <Deck>data
+                );
+              } catch (e) {
+                console.error(e);
+              }
             }
           },
         },
@@ -103,48 +119,68 @@ export class DecksPage implements OnInit {
       mode: 'ios',
       header: 'Filtros',
       cssClass: 'filter-groups',
-      buttons: [{
-        text: `Ultimos Alterados`,
-        handler: () => {
-          try {
-            this.decks = this.decksService.filter('updated_at', this.userId, this.groupId, this.decksOrderUpdatedAtDesc);
-            this.decksOrderUpdatedAtDesc = !this.decksOrderUpdatedAtDesc;
-            this.decksOrderNameDesc = false;
-            this.decksOrderCreatedAtDesc = false;
-          } catch (e) {
-            console.error(e);
-          }
-        }
-      }, {
-        text: 'Ordem Alfabética',
-        handler: () => {
-          try {
-            this.decks = this.decksService.filter('name', this.userId, this.groupId, this.decksOrderNameDesc);
-            this.decksOrderNameDesc = !this.decksOrderNameDesc;
-            this.decksOrderCreatedAtDesc = false;
-            this.decksOrderUpdatedAtDesc = false;
-          } catch (e) {
-            console.error(e);
-          }
-        }
-      }, {
-        text: 'Data de Criação',
-        handler: () => {
-          try {
-            this.decks = this.decksService.filter('created_at', this.userId, this.groupId, this.decksOrderCreatedAtDesc);
-            this.decksOrderCreatedAtDesc = !this.decksOrderCreatedAtDesc;
-            this.decksOrderNameDesc = false;
-            this.decksOrderUpdatedAtDesc = false;
-          } catch (e) {
-            console.error(e);
-          }
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => { }
-      }]
+      buttons: [
+        {
+          text: `Ultimos Alterados`,
+          handler: () => {
+            try {
+              this.decks = this.decksService.filter(
+                'updated_at',
+                this.userId,
+                this.groupId,
+                this.decksOrderUpdatedAtDesc
+              );
+              this.decksOrderUpdatedAtDesc = !this.decksOrderUpdatedAtDesc;
+              this.decksOrderNameDesc = false;
+              this.decksOrderCreatedAtDesc = false;
+            } catch (e) {
+              console.error(e);
+            }
+          },
+        },
+        {
+          text: 'Ordem Alfabética',
+          handler: () => {
+            try {
+              this.decks = this.decksService.filter(
+                'name',
+                this.userId,
+                this.groupId,
+                this.decksOrderNameDesc
+              );
+              this.decksOrderNameDesc = !this.decksOrderNameDesc;
+              this.decksOrderCreatedAtDesc = false;
+              this.decksOrderUpdatedAtDesc = false;
+            } catch (e) {
+              console.error(e);
+            }
+          },
+        },
+        {
+          text: 'Data de Criação',
+          handler: () => {
+            try {
+              this.decks = this.decksService.filter(
+                'created_at',
+                this.userId,
+                this.groupId,
+                this.decksOrderCreatedAtDesc
+              );
+              this.decksOrderCreatedAtDesc = !this.decksOrderCreatedAtDesc;
+              this.decksOrderNameDesc = false;
+              this.decksOrderUpdatedAtDesc = false;
+            } catch (e) {
+              console.error(e);
+            }
+          },
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {},
+        },
+      ],
     });
     await actionSheet.present();
   }
@@ -153,7 +189,7 @@ export class DecksPage implements OnInit {
     const modal = await this.modalController.create({
       component: ArchivedPage,
       cssClass: 'my-custom-class',
-      componentProps: { userId: this.userId, groupId: this.groupId }
+      componentProps: { userId: this.userId, groupId: this.groupId },
     });
     return await modal.present();
   }
@@ -161,12 +197,17 @@ export class DecksPage implements OnInit {
   async showList(ev: Event, data: Deck) {
     const popover = await this.popoverController.create({
       component: ListPopoverComponent,
-      componentProps: { deck: data, userId: this.userId, groupId: this.groupId },
+      componentProps: {
+        deck: data,
+        userId: this.userId,
+        groupId: this.groupId,
+      },
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true
+      translucent: true,
     });
     return await popover.present();
   }
-}
 
+
+}

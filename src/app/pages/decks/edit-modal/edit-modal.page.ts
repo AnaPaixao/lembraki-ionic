@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { ModalController, AlertController } from '@ionic/angular';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Deck } from 'src/app/classes/deck';
@@ -21,7 +22,8 @@ export class EditModalPage implements OnInit, OnDestroy {
   constructor(
      private decksService: DecksService,
      private modalController: ModalController,
-     private alertController: AlertController
+     private alertController: AlertController,
+     private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -47,12 +49,20 @@ export class EditModalPage implements OnInit, OnDestroy {
   }
 
   updateDeck(){
-    try{
-      this.decksService.updateDeck(this.userId, this.groupId, this.deck.id, this.deck)
-      this.closeModal();
-    }catch(e){
-      console.error(e)
+    if(this.deck.name == ""){
+
+      this.toastService.presentToast('Não é possível atualizar um deck sem nome!')
+
+    } else {
+      
+      try{
+        this.decksService.updateDeck(this.userId, this.groupId, this.deck.id, this.deck)
+        this.closeModal();
+      }catch(e){
+        console.error(e)
+      }
     }
+
   }
 
   async alertConfirmDelete() {

@@ -25,17 +25,20 @@ ion-content {
     height: 30px;
     -webkit-appearance: none;
     border: none;
+    border-color: #FFF;
     border-radius: 50%;
     position: absolute;
     outline: none;
     left: 12px;
     top: 14px;
     box-shadow: 2px 2px 5px rgba(17, 17, 17, 0.4);
+    background-color: #FFF !important;
   }
 
   input[type="color"]::-webkit-color-swatch-wrapper {
     padding: 0;
     border-radius: 50%;
+
   }
 
   input[type="color"]::-webkit-color-swatch {
