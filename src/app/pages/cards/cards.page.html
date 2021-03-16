@@ -19,16 +19,16 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let card of cards | async">
-        <ion-card [style.background-color]="'rgb(255, 255, 153)'" class="ion-no-margin" (click)="editModal(card)">
+        <ion-card mode="md" [style.background-color]="'rgb(255, 255, 153)'" class="ion-no-margin" (click)="editModal(card)">
 
           <ion-card-header>
 
             <ion-card-title class="ion-padding-end">
-              {{card.front}}
+              {{ card.front.length > 27 ? card.front.slice(0, 27) + '...' : card.front }}
             </ion-card-title>
 
             <ion-card-subtitle>
-              {{card.back}}
+              {{ card.back.length > 64 ? card.back.slice(0, 64) + '...' : card.back }}
             </ion-card-subtitle>
 
           </ion-card-header>

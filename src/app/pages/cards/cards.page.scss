@@ -6,7 +6,19 @@ ion-content {
     --box-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     text-shadow: 2px 4px 5px rgba(0,0,0,0.4);
   }
-}
+
+  ion-card{
+    height: 135px;
+
+
+    ion-card-title {
+      font-size: 1rem;
+    }
+  }
+
+  }
+
+
 
 ion-footer {
   position: fixed;
