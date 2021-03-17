@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { GroupService } from './../../services/group.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { ToastService } from '../../services/toast.service';
 import { Observable, Subscription } from 'rxjs';
@@ -20,11 +20,17 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class GroupPage implements OnInit {
   groups: Observable<Group[]>;
+  groupsArray: Group[];
   groupsOrderNameDesc: boolean = false;
   groupsOrderCreatedAtDesc: boolean = true;
   groupsOrderUpdatedAtDesc: boolean = false;
 
   userId: string;
+
+  /* Start Message */
+
+@ViewChild('startMessage') startMessage: ElementRef;
+
 
   constructor(
     private groupService: GroupService,
@@ -40,9 +46,21 @@ export class GroupPage implements OnInit {
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
       this.groups = this.groupService.getGroups(res.uid);
+      this.groups.subscribe((arrayGroups)=>{
+        this.groupsArray = arrayGroups;
+        this.showStartMessage(arrayGroups);
+      })
+
     });
   }
 
+  showStartMessage(arrayGroups : Group[]){
+    if(!arrayGroups[0]){
+      this.startMessage.nativeElement.style.display = "flex";
+    } else {
+      this.startMessage.nativeElement.style.display = "none";
+    }
+  }
 
   addGroup() {
     this.presentGroupAlertInput();

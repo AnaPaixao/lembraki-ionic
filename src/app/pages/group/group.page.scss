@@ -107,4 +107,18 @@ ion-footer {
   }
 }
 
+div.start-message {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  color: rgb(129, 129, 129);
+  // color: var(--ion-color-medium);
+
+  h2 {
+    line-height: 1.4 !important;
+  }
+}
+
 

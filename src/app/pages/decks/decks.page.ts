@@ -11,7 +11,7 @@ import { Deck } from './../../classes/deck';
 import { DecksService } from './../../services/decks.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListPopoverComponent } from './list-popover/list-popover.component';
 import { ToastService } from '../../services/toast.service';
@@ -43,6 +43,11 @@ export class DecksPage implements OnInit {
   groupColor: string;
 
   decks: Observable<Deck[]>;
+  decksArray: Deck[];
+
+  /* Start Message */
+
+@ViewChild('startMessage') startMessage: ElementRef;
 
   //Filter
   decksOrderNameDesc: boolean = false;
@@ -61,7 +66,20 @@ export class DecksPage implements OnInit {
         this.groupName = e.data().name;
         this.groupColor = e.data().color;
       });
+
+      this.decks.subscribe((arrayDecks)=>{
+        this.decksArray = arrayDecks;
+        this.showStartMessage(arrayDecks);
+      })
     });
+  }
+
+  showStartMessage(arrayDecks : Deck[]){
+    if(!arrayDecks[0]){
+      this.startMessage.nativeElement.style.display = "flex";
+    } else {
+      this.startMessage.nativeElement.style.display = "none";
+    }
   }
 
 

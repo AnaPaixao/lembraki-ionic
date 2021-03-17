@@ -13,8 +13,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-margin-bottom">
 
+  <div class="start-message ion-padding" style="display:none;" #startMessage>
+    <h2 class="ubuntu ion-margin-bottom">Você não possui <span style="font-weight: bold;">Decks</span>.</h2>
+    <ion-icon src="assets/icon/deck.svg" style='font-size: 6rem;'></ion-icon>
+    <h2 class="ubuntu">Crie um deck clicando no botão <ion-icon style="vertical-align: middle;" name="add-circle-outline"></ion-icon>, para organizar suas cartas.</h2>
+  </div>
 
   <ion-grid fixed>
     <ion-row>
@@ -22,6 +27,7 @@
         <div class="dots" (click)="showList($event, deck)">
           <ion-icon slot="start" name="ellipsis-vertical"></ion-icon>
         </div>
+
         <ion-card color="primary" [style.background-color]="deck.color" [routerLink]="['/cards', groupId, deck.id]">
 
           <ion-card-header>

@@ -11,10 +11,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button [disabled]="!disableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
+<ion-content class="ion-margin-bottom">
+  <ion-button [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
     Iniciar
   </ion-button>
+
+  <div class="start-message ion-padding" style="display:none;" #startMessage>
+    <h2 class="ubuntu ion-margin-bottom">Você não possui <span style="font-weight: bold;">Cartas</span>.</h2>
+    <ion-icon src="assets/icon/card.svg" style='font-size: 6rem;'></ion-icon>
+    <h2 class="ubuntu">Crie algumas cartas clicando no botão <ion-icon style="vertical-align: middle;" name="add-circle-outline"></ion-icon>, para iniciar seus estudos.</h2>
+  </div>
 
   <ion-grid fixed>
     <ion-row>

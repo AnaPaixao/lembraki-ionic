@@ -7,7 +7,7 @@ import {
 import { DecksService } from 'src/app/services/decks.service';
 import { Observable } from 'rxjs';
 import { CardsService } from './../../services/cards.service';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Card } from 'src/app/classes/card';
@@ -23,9 +23,14 @@ export class CardsPage implements OnInit {
   deckId: string;
   groupId: string;
   cards: Observable<Card[]>;
+  cardsArray: Card[];
   deckName: string;
   deckColor: string;
-  disableStart: boolean = false;
+  enableStart: boolean = false;
+
+  /* Start Message */
+
+  @ViewChild('startMessage') startMessage: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +58,10 @@ export class CardsPage implements OnInit {
       this.cards.subscribe((res) => {
         // console.log(res);
         if (res[0]) {
-          this.disableStart = true;
+          this.enableStart = true;
+          this.startMessage.nativeElement.style.display = "none";
+        } else {
+          this.startMessage.nativeElement.style.display = "flex";
         }
       });
 
@@ -64,6 +72,8 @@ export class CardsPage implements OnInit {
           this.deckName = e.data().name;
           this.deckColor = e.data().color;
         });
+
+
     });
   }
 
@@ -138,8 +148,8 @@ export class CardsPage implements OnInit {
       if (data.data == 'deleted') {
         this.cards.subscribe((res) => {
           if (!res[0]) {
-            this.disableStart = false;
-            // console.log(this.disableStart);
+            this.enableStart = false;
+            // console.log(this.enableStart);
           }
         });
       }

@@ -1,6 +1,6 @@
 {
   "appId": "lembraki.com.github.AnaPaixao",
-  "appName": "lembraki",
+  "appName": "Lembraki",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
