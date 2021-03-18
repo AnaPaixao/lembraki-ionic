@@ -28,6 +28,7 @@ export class ArchivedPage implements OnInit, OnDestroy {
       'updated_at'
     );
     this.sub = this.archivedGroupsObservable.subscribe((res) => {
+      this.archivedGroups = [];
       res.map((data) => {
         data.updated_at = new Date(data.updated_at.seconds * 1000);
         this.archivedGroups.push(<Group>data);

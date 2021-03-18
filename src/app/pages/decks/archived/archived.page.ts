@@ -25,6 +25,7 @@ export class ArchivedPage implements OnInit {
   ngOnInit() {
     this.archivedDecksObservable = this.decksService.getDecks(this.userId, this.groupId, true, 'updated_at');
     this.sub = this.archivedDecksObservable.subscribe((res) => {
+      this.archivedDecks = [];
       res.map((data) => {
         console.log(data);
         data.updated_at = new Date(data.updated_at.seconds * 1000);
