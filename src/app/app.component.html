@@ -15,7 +15,7 @@
         </ion-list>
 
         <ion-list id="inbox-list" lines="none">
-          <ion-menu-toggle auto-hide="false" *ngIf="auth.user | async as user; else showLogin">
+          <ion-menu-toggle auto-hide="false" *ngIf="auth.user | async as user;">
             <ion-item routerDirection="root" routerLink="/profile" lines="none" detail="false"
               routerLinkActive="selected">
               <ion-avatar slot="start">
@@ -38,24 +38,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-
-          <ng-template #showLogin>
-            <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false"
-                routerLinkActive="selected">
-                <ion-avatar slot="start">
-                  <ion-img src="assets/default-profile.png" alt="Faça Login"></ion-img>
-                </ion-avatar>
-                <ion-label>
-                  Faça login
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ng-template>
-
-
         </ion-list>
-
       </ion-content>
       <ion-text class="ion-text-center ion-padding">
         <small>&copy; Copyright 2021 - 2019.04</small>

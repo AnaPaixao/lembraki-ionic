@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
 
   public userLogin: User = {};
   private loading: any;
+  hidePassword: boolean = true;
 
   constructor(
     private loadingCtrl: LoadingController,

@@ -17,6 +17,7 @@ export class RegisterPage implements OnInit {
 
   public userRegister: User = {};
   private loading: any;
+  hidePassword: boolean = true;
 
   constructor(
     private loadingCtrl: LoadingController,

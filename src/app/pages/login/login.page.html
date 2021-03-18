@@ -23,9 +23,10 @@
         <ion-input type="email" [(ngModel)]="userLogin.email"></ion-input>
       </ion-item>
 
-      <ion-item class="ion-margin-top" lines="none" color="light">
+      <ion-item class="ion-margin-top eye" lines="none" color="light">
         <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="userLogin.password"></ion-input>
+        <ion-input [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="userLogin.password"></ion-input>
+        <ion-icon slot="end" style="vertical-align: middle;" [name]="!hidePassword ? 'eye' : 'eye-off'" (click)="hidePassword = !hidePassword"></ion-icon>
       </ion-item>
 
       <ion-button class="ion-margin-top" color="tertiary" expand="block" (click)="login()">

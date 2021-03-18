@@ -1,5 +1,11 @@
 ion-content {
 
+  ion-item.eye {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   #right-top {
     position: fixed;
     left: 0px;

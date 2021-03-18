@@ -64,7 +64,11 @@ const routes: Routes = [
   {
     path: 'cards/:groupId/:deckId',
     loadChildren: () => import('./pages/cards/cards.module').then( m => m.CardsPageModule)
+  },  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   }
+
 
 
 
