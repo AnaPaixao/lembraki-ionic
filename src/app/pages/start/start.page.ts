@@ -49,7 +49,6 @@ export class StartPage implements OnInit {
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
     this.deckId = this.route.snapshot.paramMap.get('deckId');
-    this.direction = this.route.snapshot.paramMap.get('direction');
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;

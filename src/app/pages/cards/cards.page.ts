@@ -27,7 +27,10 @@ export class CardsPage implements OnInit {
   cardsArray: Card[];
   deckName: string;
   deckColor: string;
+
+  //Conditionals
   enableStart: boolean = false;
+  deckInProgress: boolean;
 
   /* Start Message */
 
@@ -72,6 +75,7 @@ export class CardsPage implements OnInit {
           // console.log(e.data());
           this.deckName = e.data().name;
           this.deckColor = e.data().color;
+          this.deckInProgress = e.data().in_progress;
         });
 
 

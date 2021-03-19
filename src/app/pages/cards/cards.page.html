@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{deckName}}</ion-title>
-    <ion-button *ngIf="false" color="tertiary" slot="end" class="ion-margin-end">
+    <ion-button *ngIf="deckInProgress" color="tertiary" slot="end" class="ion-margin-end">
       Reset
       <ion-icon slot="start" name="refresh"></ion-icon>
     </ion-button>
@@ -12,9 +12,15 @@
 </ion-header>
 
 <ion-content class="ion-margin-bottom">
-  <ion-button [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
+  <ion-button *ngIf="!deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
     Iniciar
   </ion-button>
+
+  <ion-button *ngIf="deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" [routerLink]="['/start', this.groupId, this.deckId, data]" class="ion-margin" size="large">
+    Continuar
+  </ion-button>
+
+
 
   <div class="start-message ion-padding" style="display:none;" #startMessage>
     <h2 class="ubuntu ion-margin-bottom">Você não possui <span style="font-weight: bold;">Cartas</span>.</h2>
