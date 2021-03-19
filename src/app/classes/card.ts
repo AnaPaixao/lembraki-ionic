@@ -5,4 +5,5 @@ export class Card {
   color: string;
   updated_at: any;
   created_at: any;
+  situation: 'right' | 'wrong' | 'waiting' | '';
 }

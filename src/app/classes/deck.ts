@@ -2,7 +2,7 @@ export class Deck {
   id: string;
   name: string;
   color: string;
-  direction: string;
+  direction: 'term' | 'definition' | '';
   in_progress: boolean;
   progress: number;
   archived: boolean;

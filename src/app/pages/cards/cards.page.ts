@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Card } from 'src/app/classes/card';
 import { EditModalPage } from './edit-modal/edit-modal.page';
+import { Deck } from 'src/app/classes/deck';
 
 @Component({
   selector: 'app-cards',
@@ -189,6 +190,19 @@ export class CardsPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
+
+            const deck = {
+              in_progress: true,
+              direction: data
+            }
+
+            try {
+              this.decksService.updateDeck(this.userId, this.groupId, this.deckId, <Deck>deck);
+            }
+            catch(e){
+              console.error(e);
+            }
+
             this.router.navigate(['/start', this.groupId, this.deckId, data]);
           }
         }

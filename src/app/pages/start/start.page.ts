@@ -5,6 +5,7 @@ import { CardsService } from './../../services/cards.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { Card } from 'src/app/classes/card';
+import { Deck } from 'src/app/classes/deck';
 
 @Component({
   selector: 'app-start',
@@ -43,7 +44,7 @@ export class StartPage implements OnInit {
     private cardsService: CardsService,
     private route: ActivatedRoute,
     private decksService: DecksService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
@@ -64,9 +65,12 @@ export class StartPage implements OnInit {
           // console.log(e.data())
           this.deckName = e.data().name;
           this.deckColor = e.data().color;
+          this.index = e.data().progress;
+          this.direction = e.data().direction;
         });
 
       this.cards.subscribe((res) => {
+        this.cardsArray = [];
         res.map((data) => {
           this.cardsArray.push(<Card>data);
         });
@@ -75,7 +79,7 @@ export class StartPage implements OnInit {
     });
   }
 
-  ngDoCheck() {}
+  ngDoCheck() { }
 
   ngAfterViewChecked() {
     // if(this.cardBackContent){
@@ -83,7 +87,6 @@ export class StartPage implements OnInit {
     // }
 
     if (this.cardBackInner && this.cardBackContent) {
-      console.log(this.cardBackInner.nativeElement.textContent.length);
 
       if (this.cardBackInner.nativeElement.textContent.length < 210) {
         this.cardBackContent.nativeElement.classList.add('flex-center');
@@ -95,18 +98,52 @@ export class StartPage implements OnInit {
   }
 
   Remember(card: Card) {
-    this.rightCards.push(card);
+
     this.incrementIndex();
+    this.rightCards.push(card);
+
+    const deck = {
+      progress: this.index
+    }
+
+    const cardSituation = {
+      situation: 'right'
+    }
+
+    try {
+      this.decksService.updateDeck(this.userId, this.groupId, this.deckId, <Deck>deck);
+      this.cardsService.updateCard(this.userId, this.groupId, this.deckId, card.id, <Card>cardSituation);
+
+    } catch (e) {
+      console.error(e);
+    }
+
   }
 
   NoRemember(card: Card) {
-    this.wrongCards.push(card);
     this.incrementIndex();
+    this.wrongCards.push(card);
+
+    const deck = {
+      progress: this.index
+    }
+
+    const cardSituation = {
+      situation: 'wrong'
+    }
+
+    try {
+      this.decksService.updateDeck(this.userId, this.groupId, this.deckId, <Deck>deck);
+      this.cardsService.updateCard(this.userId, this.groupId, this.deckId, card.id, <Card>cardSituation);
+
+    } catch (e) {
+      console.error(e);
+    }
+
   }
 
   incrementIndex() {
     this.index++;
-    console.log(this.index);
   }
 
   flipCard() {
