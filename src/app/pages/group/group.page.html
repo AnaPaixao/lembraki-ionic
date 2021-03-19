@@ -18,7 +18,7 @@
   <div class="start-message ion-padding" style="display:none;" #startMessage>
     <h2 class="ubuntu ion-margin-bottom">Você não possui <span style="font-weight: bold;">Conjuntos</span>.</h2>
     <ion-icon src="assets/icon/group.svg" style='font-size: 6rem;'></ion-icon>
-    <h2 class="ubuntu">Crie um conjunto clicando no botão <ion-icon style="vertical-align: middle;" name="add-circle-outline"></ion-icon>, para organizar os seus Decks.</h2>
+    <h2 class="ubuntu">Crie um conjunto clicando no botão <ion-icon style="vertical-align: middle;" name="add-circle-outline"></ion-icon>, para organizar os seus <b>Decks</b>.</h2>
   </div>
 
    <div *ngFor="let group of groups | async" [routerLink]="['/decks', group.id]"
