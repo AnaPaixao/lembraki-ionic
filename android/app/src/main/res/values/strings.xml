@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Lembraki</string>
+    <string name="title_activity_main">Lembraki</string>
+    <string name="package_name">lembraki.com.github.AnaPaixao</string>
+    <string name="custom_url_scheme">lembraki.com.github.AnaPaixao</string>
+</resources>

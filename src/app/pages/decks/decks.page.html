@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" mode="md">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -28,7 +28,7 @@
           <ion-icon slot="start" name="ellipsis-vertical"></ion-icon>
         </div>
 
-        <ion-card color="primary" [style.background-color]="deck.color" [routerLink]="['/cards', groupId, deck.id]">
+        <ion-card mode="md" color="primary" [style.background-color]="deck.color" [routerLink]="['/cards', groupId, deck.id]">
 
           <ion-card-header>
 

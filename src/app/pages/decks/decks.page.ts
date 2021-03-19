@@ -222,7 +222,6 @@ export class DecksPage implements OnInit {
       },
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true,
     });
     return await popover.present();
   }

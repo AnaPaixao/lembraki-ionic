@@ -193,7 +193,6 @@ export class GroupPage implements OnInit {
       componentProps: { group: data, userId: this.userId },
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true,
     });
     return await popover.present();
   }
