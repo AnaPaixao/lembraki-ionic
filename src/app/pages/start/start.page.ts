@@ -15,7 +15,7 @@ export class StartPage implements OnInit {
   groupId: string;
   deckId: string;
   userId: string;
-  way: string;
+
 
   cards: Observable<Card[]>;
   deckName: string;
@@ -24,6 +24,8 @@ export class StartPage implements OnInit {
   cardsArray: Card[] = [];
   deckLength: number;
 
+  // Guardar
+  direction: string;
   index: number = 0;
 
   @ViewChild('cardBackContent') cardBackContent: ElementRef;
@@ -46,7 +48,7 @@ export class StartPage implements OnInit {
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('groupId');
     this.deckId = this.route.snapshot.paramMap.get('deckId');
-    this.way = this.route.snapshot.paramMap.get('way');
+    this.direction = this.route.snapshot.paramMap.get('direction');
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
@@ -96,6 +98,7 @@ export class StartPage implements OnInit {
     this.rightCards.push(card);
     this.incrementIndex();
   }
+
   NoRemember(card: Card) {
     this.wrongCards.push(card);
     this.incrementIndex();
