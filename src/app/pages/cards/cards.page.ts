@@ -1,6 +1,7 @@
 import { ToastService } from './../../services/toast.service';
 import {
   AlertController,
+  LoadingController,
   ModalController,
   NavController,
 } from '@ionic/angular';
@@ -31,6 +32,10 @@ export class CardsPage implements OnInit {
   //Conditionals
   enableStart: boolean = false;
   deckInProgress: boolean;
+  changeButton: string; 
+
+
+  loading: any;
 
   /* Start Message */
 
@@ -44,7 +49,8 @@ export class CardsPage implements OnInit {
     private alertController: AlertController,
     private modalController: ModalController,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    public loadingController: LoadingController
   ) {}
 
   ngOnInit() {
@@ -195,6 +201,8 @@ export class CardsPage implements OnInit {
           text: 'Ok',
           handler: (data) => {
 
+            this.changeButton = 'continue';
+
             const deck = {
               in_progress: true,
               direction: data
@@ -207,7 +215,7 @@ export class CardsPage implements OnInit {
               console.error(e);
             }
 
-            this.router.navigate(['/start', this.groupId, this.deckId, data]);
+            this.router.navigate(['/start', this.groupId, this.deckId]);
           }
         }
       ]
@@ -216,5 +224,34 @@ export class CardsPage implements OnInit {
     await alert.present();
   }
 
+
+  async resetCards(){
+    
+    await this.presentLoading();
+
+    try {
+      this.cardsService.resetCards(this.userId, this.groupId, this.deckId, this.cards);
+      this.decksService.updateDeck(this.userId, this.groupId, this.deckId, <Deck>{
+        progress: 0,
+        in_progress: false,
+        wrongCards: 0,
+        rightCards: 0
+      })
+      
+    } catch(e) {
+      console.error(e);
+    } finally {
+      this.loadingController.dismiss();
+      this.changeButton = null;
+      this.deckInProgress = false;
+    }
+  }
+
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      message: 'Por favor, aguarde...',
+    });
+    return this.loading.present();
+  }
 
 }

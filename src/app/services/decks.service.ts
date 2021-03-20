@@ -58,6 +58,8 @@ export class DecksService {
         in_progress: false,
         progress: 0,
         archived: false,
+        wrongCards: 0,
+        rightCards: 0,
         created_at: firebase.firestore.FieldValue.serverTimestamp(),
         updated_at: firebase.firestore.FieldValue.serverTimestamp(),
       })

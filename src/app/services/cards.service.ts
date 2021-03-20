@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import { Card } from '../classes/card';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -66,6 +66,25 @@ export class CardsService {
       .update(data);
   }
 
+
+  resetCards(userId: string, groupId: string, deckId: string, cards: any){
+    cards.subscribe((res)=>{
+      
+      res.forEach((card: Card) => {
+        
+        try {
+          this.updateCard(userId, groupId, deckId, card.id, <Card>{
+            situation: ''
+          });
+        } catch(e){
+          console.error(e);
+        } 
+
+      });
+
+
+    })
+  }
 
 
 }

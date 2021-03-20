@@ -34,6 +34,8 @@ export class StartPage implements OnInit {
 
   @ViewChild('cardInner') cardInner: ElementRef;
 
+  wrongCardsNumber: number;
+  rightCardsNumber: number;
 
   // Result
   wrongCards: Card[] = [];
@@ -59,13 +61,15 @@ export class StartPage implements OnInit {
       );
 
       this.decksService
-        .getDeckOnce(res.uid, this.groupId, this.deckId)
-        .subscribe((e) => {
-          // console.log(e.data())
-          this.deckName = e.data().name;
-          this.deckColor = e.data().color;
-          this.index = e.data().progress;
-          this.direction = e.data().direction;
+        .getDeck(res.uid, this.groupId, this.deckId)
+        .subscribe((data) => {
+          console.log(data);
+          this.deckName = data.name;
+          this.deckColor = data.color;
+          this.index = data.progress;
+          this.direction = data.direction;
+          this.wrongCardsNumber = data.wrongCards;
+          this.rightCardsNumber = data.rightCards;
         });
 
       this.cards.subscribe((res) => {
@@ -100,9 +104,11 @@ export class StartPage implements OnInit {
 
     this.incrementIndex();
     this.rightCards.push(card);
+    ++this.rightCardsNumber;
 
     const deck = {
-      progress: this.index
+      progress: this.index,
+      rightCards: this.rightCardsNumber
     }
 
     const cardSituation = {
@@ -122,9 +128,11 @@ export class StartPage implements OnInit {
   NoRemember(card: Card) {
     this.incrementIndex();
     this.wrongCards.push(card);
+    ++this.wrongCardsNumber;
 
     const deck = {
-      progress: this.index
+      progress: this.index,
+      wrongCards: this.wrongCardsNumber
     }
 
     const cardSituation = {

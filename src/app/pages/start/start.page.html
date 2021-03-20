@@ -46,17 +46,17 @@
 
   <div class="content-result">
     <div class="right">
-      <p>{{ rightCards.length }}</p>
+      <p>{{ rightCardsNumber }}</p>
       <ion-icon style="font-size: 1.6rem;" name="checkmark-outline"></ion-icon>
     </div>
     <div class="wrong">
-      <p>{{ wrongCards.length}}</p>
+      <p>{{ wrongCardsNumber }}</p>
       <ion-icon style="font-size: 1.6rem;" name="close-outline"></ion-icon>
     </div>
   </div>
 
-  <h1 *ngIf="wrongCards[0]" class="ubuntu">Cartas erradas:</h1>
-  <div *ngIf="!wrongCards[0]" style="text-align: center;" class="ubuntu">
+  <h1 *ngIf="wrongCardsNumber != 0" class="ubuntu">Cartas erradas:</h1>
+  <div *ngIf="wrongCardsNumber == 0" style="text-align: center;" class="ubuntu">
     <h2 class="ubuntu">Você acertou TUDO!</h2>
     <h2 class="ubuntu">Continue assim, Parabéns!!</h2>
   </div>

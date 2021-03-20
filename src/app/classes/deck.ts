@@ -3,6 +3,8 @@ export class Deck {
   name: string;
   color: string;
   direction: 'term' | 'definition' | '';
+  wrongCards: number;
+  rightCards: number;
   in_progress: boolean;
   progress: number;
   archived: boolean;

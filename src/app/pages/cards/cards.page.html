@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{deckName}}</ion-title>
-    <ion-button *ngIf="deckInProgress" color="tertiary" slot="end" class="ion-margin-end">
+    <ion-button *ngIf="changeButton || deckInProgress" color="tertiary" slot="end" class="ion-margin-end" (click)="resetCards()">
       Reset
       <ion-icon slot="start" name="refresh"></ion-icon>
     </ion-button>
@@ -12,11 +12,12 @@
 </ion-header>
 
 <ion-content class="ion-margin-bottom">
-  <ion-button *ngIf="!deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
+
+  <ion-button *ngIf="!changeButton && !deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
     Iniciar
   </ion-button>
 
-  <ion-button *ngIf="deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" [routerLink]="['/start', this.groupId, this.deckId, data]" class="ion-margin" size="large">
+  <ion-button *ngIf="changeButton || deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" [routerLink]="['/start', this.groupId, this.deckId]" class="ion-margin" size="large">
     Continuar
   </ion-button>
 
@@ -41,6 +42,7 @@
 
             <ion-card-subtitle>
               {{ card.back.length > 64 ? card.back.slice(0, 64) + '...' : card.back }}
+              <p>{{ card.situation }}</p>
             </ion-card-subtitle>
 
           </ion-card-header>
