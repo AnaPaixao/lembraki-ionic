@@ -25,6 +25,8 @@ export class StartPage implements OnInit {
   cardsArray: Card[] = [];
   deckLength: number;
 
+  cardsWrong: Observable<Card[]>;
+
   // Guardar
   direction: string;
   index: number = 0;
@@ -79,7 +81,11 @@ export class StartPage implements OnInit {
         });
         this.deckLength = this.cardsArray.length;
       });
+
+      this.cardsWrong = this.cardsService.getWrongCards(res.uid, this.groupId, this.deckId);
     });
+
+
   }
 
   ngDoCheck() { }

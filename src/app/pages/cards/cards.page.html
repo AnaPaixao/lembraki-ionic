@@ -32,7 +32,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let card of cards | async">
-        <ion-card mode="md" [style.background-color]="'rgb(255, 255, 153)'" class="ion-no-margin" (click)="editModal(card)">
+        <ion-card mode="md" [color]="card.situation == 'wrong' ? 'primary' : ''" [style.background-color]="card.situation != 'wrong' ? 'rgb(255, 255, 153)' : 'var(--ion-color-secondary)'" class="ion-no-margin" (click)="editModal(card)">
 
           <ion-card-header>
 
@@ -42,7 +42,6 @@
 
             <ion-card-subtitle>
               {{ card.back.length > 64 ? card.back.slice(0, 64) + '...' : card.back }}
-              <p>{{ card.situation }}</p>
             </ion-card-subtitle>
 
           </ion-card-header>

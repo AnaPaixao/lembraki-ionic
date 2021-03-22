@@ -13,27 +13,27 @@ export class CardsService {
     private afs: AngularFirestore
   ) { }
 
-  getCardOnce(userId:string, groupId:string, deckId:string, cardId: string){
+  getCardOnce(userId: string, groupId: string, deckId: string, cardId: string) {
     return this.afs
-    .collection('users').doc(userId)
-    .collection('group').doc(groupId)
-    .collection('decks').doc(deckId)
-    .collection('cards').doc(cardId)
-    .get();
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').doc(deckId)
+      .collection('cards').doc(cardId)
+      .get();
 
-}
+  }
 
 
-  getCards(userId:string, groupId:string, deckId:string){
-      return this.afs
+  getCards(userId: string, groupId: string, deckId: string) {
+    return this.afs
       .collection('users').doc(userId)
       .collection('group').doc(groupId)
       .collection('decks').doc(deckId)
       .collection<Card>('cards')
-      .valueChanges({idField: 'id'});
+      .valueChanges({ idField: 'id' });
   }
 
-  addCard(userId:string, groupId:string, deckId: string, data: Card){
+  addCard(userId: string, groupId: string, deckId: string, data: Card) {
 
     data.updated_at = firebase.firestore.FieldValue.serverTimestamp();
     data.created_at = firebase.firestore.FieldValue.serverTimestamp();
@@ -67,23 +67,30 @@ export class CardsService {
   }
 
 
-  resetCards(userId: string, groupId: string, deckId: string, cards: any){
-    cards.subscribe((res)=>{
-      
-      res.forEach((card: Card) => {
-        
-        try {
-          this.updateCard(userId, groupId, deckId, card.id, <Card>{
-            situation: ''
-          });
-        } catch(e){
-          console.error(e);
-        } 
+  resetCards(userId: string, groupId: string, deckId: string, cards: any) {
 
-      });
+    let query = this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').doc(deckId)
+      .collection('cards').get().subscribe((res)=>{
+        res.forEach((res)=>{
 
+          this.updateCard(userId, groupId, deckId, res.id, <Card>{
+            situation: ""
+          })
 
-    })
+        })
+      })
+  }
+
+  getWrongCards(userId: string, groupId: string, deckId: string){
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').doc(deckId)
+      .collection<Card>('cards', ref => ref.where('situation', '==', 'wrong'))
+      .valueChanges({ idField: 'id' });
   }
 
 

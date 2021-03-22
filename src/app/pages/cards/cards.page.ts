@@ -32,7 +32,7 @@ export class CardsPage implements OnInit {
   //Conditionals
   enableStart: boolean = false;
   deckInProgress: boolean;
-  changeButton: string; 
+  changeButton: string;
 
 
   loading: any;
@@ -226,7 +226,7 @@ export class CardsPage implements OnInit {
 
 
   async resetCards(){
-    
+
     await this.presentLoading();
 
     try {
@@ -237,7 +237,7 @@ export class CardsPage implements OnInit {
         wrongCards: 0,
         rightCards: 0
       })
-      
+
     } catch(e) {
       console.error(e);
     } finally {
