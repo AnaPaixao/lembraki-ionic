@@ -27,7 +27,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     AngularFirestoreModule.enablePersistence(),
     FontAwesomeModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
