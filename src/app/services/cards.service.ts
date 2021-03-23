@@ -23,7 +23,6 @@ export class CardsService {
 
   }
 
-
   getCards(userId: string, groupId: string, deckId: string) {
     return this.afs
       .collection('users').doc(userId)

@@ -38,15 +38,12 @@
 
             <ion-card-subtitle>
               {{ deck.in_progress ? 'Iniciado' : 'Não Iniciado' }} <br>
-              <span *ngIf="true"><b>Progresso:</b> {{ deck.progress + '%' }}</span>
             </ion-card-subtitle>
-
-
 
           </ion-card-header>
 
           <ion-card-content>
-            <ion-progress-bar [value]="deck.progress / 100"></ion-progress-bar>
+            <app-progress-bar [userId]="userId" [groupId]="groupId" [deckId]="deck.id" [deckProgress]="deck.progress"></app-progress-bar>
           </ion-card-content>
 
         </ion-card>

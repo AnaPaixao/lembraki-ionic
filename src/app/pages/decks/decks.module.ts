@@ -1,3 +1,4 @@
+import { ProgressBarComponent } from './../../components/progress-bar/progress-bar.component';
 import { ListPopoverComponent } from './list-popover/list-popover.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +24,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     DecksPageRoutingModule,
     FontAwesomeModule
   ],
-  declarations: [DecksPage, ListPopoverComponent]
+  declarations: [DecksPage, ListPopoverComponent, ProgressBarComponent]
 })
 export class DecksPageModule {
   constructor(library: FaIconLibrary) {

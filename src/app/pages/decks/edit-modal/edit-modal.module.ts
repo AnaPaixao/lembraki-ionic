@@ -1,3 +1,4 @@
+import { ProgressBarComponent } from './../../../components/progress-bar/progress-bar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,6 @@ import { EditModalPage } from './edit-modal.page';
     IonicModule,
     EditModalPageRoutingModule
   ],
-  declarations: [EditModalPage]
+  declarations: [EditModalPage, ProgressBarComponent]
 })
 export class EditModalPageModule {}

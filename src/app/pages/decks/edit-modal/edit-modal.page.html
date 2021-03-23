@@ -18,9 +18,7 @@
     </ion-item>
   </ion-list>
 
-  <h4>Progresso atual <span style="display: inline-block; position: absolute; right: 20px;">({{deck.progress}}%)</span></h4>
-  <ion-progress-bar [value]="deck.progress / 100"></ion-progress-bar>
-  <ion-button class="ion-margin" expand="block" color="tertiary" (click)="alertConfirmDelete()">Zerar progresso</ion-button>
+  <app-progress-bar [userId]="userId" [groupId]="groupId" [deckId]="deck.id" [deckProgress]="deck.progress"></app-progress-bar>
 </ion-content>
 
 <ion-footer class="toolbar">

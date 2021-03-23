@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
+// import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { Platform } from '@ionic/angular';
+
 
 
 @Component({
@@ -18,14 +21,34 @@ export class LoginPage implements OnInit {
   private loading: any;
   hidePassword: boolean = true;
 
+  @ViewChild('leftBottom') leftBottom: ElementRef;
+  @ViewChild('rightBottom') rightBottom: ElementRef;
+
+
   constructor(
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private authService: AuthService,
     public auth: AngularFireAuth,
     private router: Router,
-    private app: AuthService
-  ) { }
+    private app: AuthService,
+    // public keyboard: Keyboard,
+    private platform: Platform
+
+  ) {
+
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+
+      this.leftBottom.nativeElement.style.display = 'none';
+      this.rightBottom.nativeElement.style.display = 'none';
+    });
+
+    this.platform.keyboardDidHide.subscribe(() => {
+      this.leftBottom.nativeElement.style.display = 'block';
+      this.rightBottom.nativeElement.style.display = 'block';
+    });
+  }
 
   ngOnInit() {
   }
@@ -52,7 +75,7 @@ export class LoginPage implements OnInit {
         case 'auth/wrong-password':
           message = 'Usuário e/ou senha inválido.';
           break;
-         case 'auth/argument-error':
+        case 'auth/argument-error':
           message = 'É necessário informar e-mail e senha.';
           break;
       }
@@ -77,7 +100,8 @@ export class LoginPage implements OnInit {
     const toast = await this.toastCtrl.create({
       cssClass: 'toast-center',
       message,
-      duration: 2000});
+      duration: 2000
+    });
     toast.present();
   }
 
@@ -96,4 +120,5 @@ export class LoginPage implements OnInit {
       )
       .catch((error) => { console.log(error); });
   }
+
 }
