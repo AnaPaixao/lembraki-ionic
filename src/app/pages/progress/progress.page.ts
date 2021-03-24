@@ -10,7 +10,6 @@ export class ProgressPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('oi, funciona pfv')
   }
 
 }
