@@ -226,5 +226,4 @@ export class DecksPage implements OnInit {
     return await popover.present();
   }
 
-
 }

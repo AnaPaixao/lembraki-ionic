@@ -1,2 +1,4 @@
-<p *ngIf="true"><b>Progresso:</b> {{ (100 * deckProgress) / deckLength + '%' }}</p>
-<ion-progress-bar color="secondary" [value]="((100 * deckProgress) / deckLength)/100"></ion-progress-bar>
+<div *ngIf="percent || percent === 0">
+    <p><b>Progresso: </b> {{ percent * 100 + '%' }}</p>
+    <ion-progress-bar color="secondary" [value]="percent"></ion-progress-bar>
+</div>

@@ -32,6 +32,15 @@ export class CardsService {
       .valueChanges({ idField: 'id' });
   }
 
+  getCardsOnce(userId: string, groupId: string, deckId: string) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks').doc(deckId)
+      .collection<Card>('cards')
+      .get();
+  }
+
   addCard(userId: string, groupId: string, deckId: string, data: Card) {
 
     data.updated_at = firebase.firestore.FieldValue.serverTimestamp();

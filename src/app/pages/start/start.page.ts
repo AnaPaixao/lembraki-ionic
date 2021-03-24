@@ -2,7 +2,7 @@ import { DecksService } from './../../services/decks.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CardsService } from './../../services/cards.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { Card } from 'src/app/classes/card';
 import { Deck } from 'src/app/classes/deck';
@@ -12,13 +12,13 @@ import { Deck } from 'src/app/classes/deck';
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
-export class StartPage implements OnInit {
+export class StartPage implements OnInit, AfterViewChecked {
   groupId: string;
   deckId: string;
   userId: string;
 
 
-  cards: Observable<Card[]>;
+  cards: Card[] = [];
   deckName: string;
   deckColor: string;
 
@@ -56,16 +56,24 @@ export class StartPage implements OnInit {
 
     this.auth.getAuth().authState.subscribe((res) => {
       this.userId = res.uid;
-      this.cards = this.cardsService.getCards(
+
+      this.cardsService.getCardsOnce(
         res.uid,
         this.groupId,
         this.deckId
-      );
+      ).subscribe(res=>{
+        res.forEach(e=>{
+            let card = <Card>e.data();
+            card.id = e.id;
+            this.cards.push(card);
+        })
+        this.deckLength = this.cards.length;
+      })
+
 
       this.decksService
         .getDeck(res.uid, this.groupId, this.deckId)
         .subscribe((data) => {
-          console.log(data);
           this.deckName = data.name;
           this.deckColor = data.color;
           this.index = data.progress;
@@ -74,21 +82,11 @@ export class StartPage implements OnInit {
           this.rightCardsNumber = data.rightCards;
         });
 
-      this.cards.subscribe((res) => {
-        this.cardsArray = [];
-        res.map((data) => {
-          this.cardsArray.push(<Card>data);
-        });
-        this.deckLength = this.cardsArray.length;
-      });
-
       this.cardsWrong = this.cardsService.getWrongCards(res.uid, this.groupId, this.deckId);
     });
 
 
   }
-
-  ngDoCheck() { }
 
   ngAfterViewChecked() {
     // if(this.cardBackContent){
@@ -104,6 +102,10 @@ export class StartPage implements OnInit {
       }
     }
 
+  }
+
+  ngOnDestroy(){
+    console.log('START destruido');
   }
 
   Remember(card: Card) {
