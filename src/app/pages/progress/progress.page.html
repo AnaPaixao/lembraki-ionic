@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
   <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title> Decks em Progresso</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div [hidden]="true" class="start-message ion-padding">
+  <div [attr.toggle]="false" style="display:none;" #startMessage class="start-message ion-padding">
     <h2 class="ubuntu ion-margin-bottom">Você ainda não iniciou um <span style="font-weight: bold;">Deck</span>.</h2>
     <ion-icon class="ion-margin" src="assets/icon/progress.svg" style='font-size: 6rem;'></ion-icon>
     <h2 class="ubuntu ion-margin-top">Vá até um Deck e inicie um jogo para acompanhar seu progresso.</h2>

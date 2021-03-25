@@ -31,6 +31,8 @@ export class ProgressPage implements OnInit {
     private auth: AuthService
   ) { }
 
+  @ViewChild('startMessage') startMessage: ElementRef;
+
 
   ngOnInit() {
     this.auth.getAuth().authState.subscribe((userResponse) => {
@@ -69,14 +71,19 @@ export class ProgressPage implements OnInit {
               })
             })
             ++groupIndex;
+            this.showStartMessage(this.decksInProgress);
           })
         });
       });
     });
   }
 
-  ngOnDestroy(){
-    console.log('Progress Destruído.');
+  showStartMessage(decksInProgress : DeckInProgress[]){
+    if(!decksInProgress[0]){
+      this.startMessage.nativeElement.style.display = "flex";
+    } else {
+      this.startMessage.nativeElement.style.display = "none";
+      this.startMessage.nativeElement.toggle = true;
+    }
   }
-
 }
