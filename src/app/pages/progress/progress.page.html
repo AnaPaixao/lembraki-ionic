@@ -1,10 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary" mode="md">
     <ion-buttons slot="start">
-     <!--<ion-back-button></ion-back-button>-->
-<ion-menu-button></ion-menu-button>
+  <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Progresso</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,15 +16,16 @@
   </div>
 
   <section class="ion-padding ion-margin-top">
-    <article class="deck" *ngFor="let deck of [{total: 20, wrong: 5, right: 3, group: 'Matemática', name: 'Conjuntos'},{total: 10, wrong: 2, right: 3, group: 'Inglês', name: 'Animais'},{total: 32, wrong: 7, right: 16, group: 'Português', name: 'Figuras de Linguagem lorem ipsum amet satanicus potestas'}]; let i = index">
+    <article class="deck" *ngFor="let deck of decksInProgress; let i = index">
       <div class="deck-left">
         <div class="deck-icon" [title]="deck.name">{{ deck.name.length > 30 ? deck.name.slice(0,30) + '...' : deck.name }}</div>
       </div>
       <div class="deck-info ion-padding-start ion-padding-end">
-        <p><b>Total de cartas:</b> {{ deck.wrong + deck.right }}</p>
-        <p><b>Erradas:</b> {{ deck.wrong }}</p>
-        <p><b>Corretas:</b> {{ deck.right }} </p>
-        <p><b>Conjunto:</b> {{ deck.group }}</p>
+        <p><b>Total de cartas: {{ deck.cards ? deck.cards.length : '' }}</b></p>
+        <p><b>Erradas:</b> {{ deck.wrongCards }}</p>
+        <p><b>Corretas:</b> {{ deck.rightCards }} </p>
+        <p><b>Conjunto:</b> {{ groups[deck.groupIndex].name }}</p>
+
         <ion-progress-bar class="progress" value="0.5"></ion-progress-bar>
       </div>
 

@@ -17,7 +17,15 @@ export class DecksService {
       .collection('users').doc(userId)
       .collection('group').doc(groupId)
       .collection<Deck>('decks').doc(deckId)
-      .get()
+      .get();
+  }
+
+  getDecksInProgress(userId: string, groupId: string) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group').doc(groupId)
+      .collection('decks', ref => ref.where('in_progress', '==', true))
+      .get();
   }
 
   getDeck(userId: string, groupId: string, deckId: string) {
@@ -25,7 +33,7 @@ export class DecksService {
       .collection('users').doc(userId)
       .collection('group').doc(groupId)
       .collection<Deck>('decks').doc(deckId)
-      .valueChanges({ idField: 'id' })
+      .valueChanges({ idField: 'id' });
   }
 
   getDecks(userId: string, groupId: string, archived: boolean = false, orderBy: string = '') {

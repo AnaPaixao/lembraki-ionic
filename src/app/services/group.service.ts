@@ -17,6 +17,15 @@ export class GroupService {
       .get();
   }
 
+  getGroupsOnce(userId: string) {
+    return this.afs
+      .collection('users').doc(userId)
+      .collection('group')
+      .get();
+  }
+
+
+
   getGroups(id: string, archived: boolean = false, orderBy: string = '') {
     if (orderBy == '') {
       return this.afs
