@@ -13,6 +13,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
   @Input("groupId") groupId: string;
   @Input("deckId") deckId: string;
   @Input("deckProgress") deckProgress: number;
+  @Input("height") height: number;
+  @Input("showProgressText") showProgressText: boolean;
 
   deckLength: number;
   percent: number;
@@ -26,7 +28,6 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
 
     this.subscribe = this.cardsService.getCards(this.userId, this.groupId, this.deckId).subscribe(res=>{
         this.deckLength = res.length;
-        console.log('piscou')
         this.percent = Number((((this.deckProgress) / this.deckLength)).toFixed(2))
     });
 

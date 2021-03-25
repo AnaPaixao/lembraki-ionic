@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Card } from 'src/app/classes/card';
 import { Deck } from 'src/app/classes/deck';
@@ -23,7 +23,6 @@ export class ProgressPage implements OnInit {
   userId: string;
   groups: Group[] = [];
   decksInProgress: DeckInProgress[] = [];
-  cards: Card[] = [];
 
   constructor(
     private cardService: CardsService,
@@ -32,56 +31,52 @@ export class ProgressPage implements OnInit {
     private auth: AuthService
   ) { }
 
+
   ngOnInit() {
-    this.auth.getAuth().authState.subscribe((res) => {
-      this.userId = res.uid;
+    this.auth.getAuth().authState.subscribe((userResponse) => {
+      this.userId = userResponse.uid;
 
       let groupIndex = 0;
+      let deckIndex = 0;
 
-      this.groupService.getGroupsOnce(res.uid).subscribe(res => {
-        res.forEach(e => {
+      this.groupService.getGroupsOnce(userResponse.uid).subscribe(groupsResponse => {
+        groupsResponse.forEach(group => {
 
-          let group = <Group>e.data();
-          group.id = e.id;
-          this.groups.push(group);
+          let newGroup = <Group>group.data();
+          newGroup.id = group.id;
+          this.groups.push(newGroup);
 
 
-          this.deckService.getDecksInProgress(this.userId, group.id).subscribe(res => {
-            let deckIndex = 0;
-            res.forEach(e => {
-              let deck = <DeckInProgress>e.data();
-              deck.id = e.id;
-              deck.groupIndex = groupIndex;
-              this.decksInProgress.push(deck);
+          this.deckService.getDecksInProgress(this.userId, newGroup.id).subscribe(decksResponse => {
+            decksResponse.forEach(deck => {
+              let newDeck = <DeckInProgress>deck.data();
+              newDeck.id = deck.id;
+              newDeck.groupIndex = groupIndex;
+              this.decksInProgress.push(newDeck);
 
-              this.cardService.getCardsOnce(this.userId, group.id, deck.id).subscribe(res => {
-                this.decksInProgress[deckIndex].cards = [];
-                res.forEach(e => {
-                  let card = <Card>e.data();
-                  card.id = e.id;
+              this.cardService.getCardsOnce(this.userId, newGroup.id, newDeck.id).subscribe(cardsResponse => {
+                cardsResponse.forEach(card => {
+                  let newCard = <Card>card.data();
+                  newCard.id = card.id;
 
-                  this.decksInProgress[deckIndex].cards.push(card);
+                  if(!this.decksInProgress[deckIndex].cards){
+                    this.decksInProgress[deckIndex].cards = [];
+                  }
+
+                  this.decksInProgress[deckIndex].cards.push(newCard);
                 })
                 ++deckIndex;
               })
             })
             ++groupIndex;
           })
-
-
-
-
         });
-
-        console.log(this.decksInProgress);
-
       });
     });
   }
 
-
   ngOnDestroy(){
-    console.log('Progress Destruído.')
+    console.log('Progress Destruído.');
   }
 
 }

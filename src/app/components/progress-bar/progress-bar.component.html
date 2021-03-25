@@ -1,4 +1,4 @@
 <div *ngIf="percent || percent === 0">
-    <p><b>Progresso: </b> {{ percent * 100 + '%' }}</p>
-    <ion-progress-bar color="secondary" [value]="percent"></ion-progress-bar>
+    <p [style.display]="showProgressText !== false ? 'block' : 'none'" ><b>Progresso: </b> {{ percent * 100 + '%' }}</p>
+    <ion-progress-bar [style.height]="height + 'px'" color="secondary" [value]="percent"></ion-progress-bar>
 </div>

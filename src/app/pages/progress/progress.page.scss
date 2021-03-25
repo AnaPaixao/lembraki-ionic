@@ -54,6 +54,9 @@ article .deck-name {
   justify-content: center;
   overflow-y: auto;
   text-align: center;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  box-shadow: 3px 3px 0 #000;
 
 }
 
@@ -62,6 +65,10 @@ width: calc(100% - 100px);
 
   p:first-child{
     margin-top: 0;
+  }
+
+  .mb{
+    margin-bottom: 8px;
   }
 
   p {
@@ -73,4 +80,5 @@ width: calc(100% - 100px);
     margin-top: 8px;
     height: 10px;
   }
+
 }

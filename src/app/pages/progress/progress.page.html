@@ -25,8 +25,9 @@
         <p><b>Erradas:</b> {{ deck.wrongCards }}</p>
         <p><b>Corretas:</b> {{ deck.rightCards }} </p>
         <p><b>Conjunto:</b> {{ groups[deck.groupIndex].name }}</p>
+        <p class="mb"><b>Progresso:</b> {{ deck.cards ? (deck.wrongCards + deck.rightCards) + '/' + deck.cards.length : '' }} </p>
 
-        <ion-progress-bar class="progress" value="0.5"></ion-progress-bar>
+        <app-progress-bar [showProgressText]="false" [height]="10" [userId]="userId" [groupId]="groups[deck.groupIndex].id" [deckId]="deck.id" [deckProgress]="deck.progress" class="progress" color="secondary"></app-progress-bar>
       </div>
 
     </article>
