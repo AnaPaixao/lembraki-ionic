@@ -1,67 +1,68 @@
 <ion-header>
-  <ion-toolbar color="primary" mode="md">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{deckName}}</ion-title>
-    <ion-button *ngIf="changeButton || deckInProgress" color="tertiary" slot="end" class="ion-margin-end" (click)="resetCards()">
-      Reset
-      <ion-icon slot="start" name="refresh"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar color="primary" mode="md">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{deckName}}</ion-title>
+        <ion-button *ngIf="changeButton || deckInProgress" color="tertiary" slot="end" class="ion-margin-end" (click)="alertReset()">
+            Resetar
+            <ion-icon slot="start" name="refresh"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-margin-bottom">
 
-  <ion-button *ngIf="!changeButton && !deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
-    Iniciar
-  </ion-button>
+    <ion-button *ngIf="!changeButton && !deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" (click)="presentAlertRadio()" class="ion-margin" size="large">
+        Iniciar
+    </ion-button>
 
-  <ion-button *ngIf="changeButton || deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" [routerLink]="['/start', this.groupId, this.deckId]" class="ion-margin" size="large">
-    Continuar
-  </ion-button>
+    <ion-button *ngIf="changeButton || deckInProgress" [disabled]="!enableStart" shape="round" expand="block" color="success" [routerLink]="['/start', this.groupId, this.deckId]" class="ion-margin" size="large">
+        Continuar
+    </ion-button>
 
 
 
-  <div class="start-message ion-padding" style="display:none;" #startMessage>
-    <h2 class="ubuntu ion-margin-bottom">Você não possui <span style="font-weight: bold;">Cartas</span>.</h2>
-    <ion-icon src="assets/icon/card.svg" style='font-size: 6rem;'></ion-icon>
-    <h2 class="ubuntu">Crie algumas cartas clicando no botão <ion-icon style="vertical-align: middle;" name="add-circle-outline"></ion-icon>, para iniciar seus estudos.</h2>
-  </div>
+    <div class="start-message ion-padding" style="display:none;" #startMessage>
+        <h2 class="ubuntu ion-margin-bottom">Você não possui <span style="font-weight: bold;">Cartas</span>.</h2>
+        <ion-icon src="assets/icon/card.svg" style='font-size: 6rem;'></ion-icon>
+        <h2 class="ubuntu">Crie algumas cartas clicando no botão
+            <ion-icon style="vertical-align: middle;" name="add-circle-outline"></ion-icon>, para iniciar seus estudos.</h2>
+    </div>
 
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col size="6" *ngFor="let card of cards | async">
-        <ion-card mode="md" [color]="card.situation == 'wrong' ? 'primary' : ''" [style.background-color]="card.situation != 'wrong' ? 'rgb(255, 255, 153)' : 'var(--ion-color-secondary)'" class="ion-no-margin" (click)="editModal(card)">
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="6" *ngFor="let card of cards | async">
+                <ion-card mode="md" [color]="card.situation == 'wrong' ? 'primary' : ''" [style.background-color]="card.situation != 'wrong' ? 'rgb(255, 255, 153)' : 'var(--ion-color-secondary)'" class="ion-no-margin" (click)="editModal(card)">
 
-          <ion-card-header>
+                    <ion-card-header>
 
-            <ion-card-title class="ion-padding-end">
-              {{ card.front.length > 27 ? card.front.slice(0, 27) + '...' : card.front }}
-            </ion-card-title>
+                        <ion-card-title class="ion-padding-end">
+                            {{ card.front.length > 27 ? card.front.slice(0, 27) + '...' : card.front }}
+                        </ion-card-title>
 
-            <ion-card-subtitle>
-              {{ card.back.length > 64 ? card.back.slice(0, 64) + '...' : card.back }}
-            </ion-card-subtitle>
+                        <ion-card-subtitle>
+                            {{ card.back.length > 64 ? card.back.slice(0, 64) + '...' : card.back }}
+                        </ion-card-subtitle>
 
-          </ion-card-header>
+                    </ion-card-header>
 
-          <ion-card-content>
+                    <ion-card-content>
 
-          </ion-card-content>
+                    </ion-card-content>
 
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 
 </ion-content>
 
 <ion-footer>
-  <div class="toolbar">
-    <ion-button mode="md" color="tertiary" shape="round" (click)="addCard()">
-      <ion-icon slot="start" slot="icon-only" style="font-size: 1em" name="add"></ion-icon>
-    </ion-button>
-  </div>
+    <div class="toolbar">
+        <ion-button mode="md" color="tertiary" shape="round" (click)="addCard()">
+            <ion-icon slot="start" slot="icon-only" style="font-size: 1em" name="add"></ion-icon>
+        </ion-button>
+    </div>
 </ion-footer>

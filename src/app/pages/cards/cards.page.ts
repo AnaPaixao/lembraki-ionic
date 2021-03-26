@@ -3,7 +3,7 @@ import {
   AlertController,
   LoadingController,
   ModalController,
-  NavController,
+  NavController
 } from '@ionic/angular';
 import { DecksService } from 'src/app/services/decks.service';
 import { Observable } from 'rxjs';
@@ -253,5 +253,29 @@ export class CardsPage implements OnInit {
     });
     return this.loading.present();
   }
+
+  async alertReset() {
+    const alert = await this.alertController.create({
+      cssClass: 'title-ubuntu',
+      header: 'Resetar progresso',
+      message: 'Tem certeza que deseja <strong>resetar</strong> o seu progresso?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.resetCards();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+
 
 }
